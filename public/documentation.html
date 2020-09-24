@@ -1,0 +1,156 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><link
+    type="text/css" rel="stylesheet" href="resources/sheet.css">
+<style type="text/css">.ritz .waffle a { color: inherit; }.ritz .waffle .s0{background-color:#ffffff;text-align:left;font-weight:bold;color:#000000;font-family:'Arial';font-size:10pt;vertical-align:bottom;white-space:normal;overflow:hidden;word-wrap:break-word;direction:ltr;padding:2px 3px 2px 3px;}.ritz .waffle .s1{background-color:#ffffff;text-align:left;color:#000000;font-family:'Arial';font-size:10pt;vertical-align:bottom;white-space:normal;overflow:hidden;word-wrap:break-word;direction:ltr;padding:2px 3px 2px 3px;}</style><div
+    class="ritz grid-container" dir="ltr"><table class="waffle" cellspacing="0"
+        cellpadding="0"><thead><tr><th class="row-header freezebar-origin-ltr"></th><th
+                    id="0C0" style="width:337px"
+                    class="column-headers-background">A</th><th id="0C1"
+                    style="width:214px" class="column-headers-background">B</th><th
+                    id="0C2" style="width:109px"
+                    class="column-headers-background">C</th><th id="0C3"
+                    style="width:196px" class="column-headers-background">D</th><th
+                    id="0C4" style="width:241px"
+                    class="column-headers-background">E</th></tr></thead><tbody><tr
+                style='height:20px;'><th id="0R0" style="height: 20px;"
+                    class="row-headers-background"><div
+                        class="row-header-wrapper" style="line-height: 20px;">1</div></th><td
+                    class="s0" dir="ltr">Business Logic</td><td class="s0"
+                    dir="ltr">URL</td><td class="s0" dir="ltr">HTTP Method</td><td
+                    class="s0" dir="ltr">Request body data format</td><td
+                    class="s0" dir="ltr">Response body data format</td></tr><tr
+                style='height:20px;'><th id="0R1" style="height: 20px;"
+                    class="row-headers-background"><div
+                        class="row-header-wrapper" style="line-height: 20px;">2</div></th><td
+                    class="s1" dir="ltr">Return a list of ALL movies to the user</td><td
+                    class="s1" dir="ltr">/movies</td><td class="s1" dir="ltr">GET</td><td
+                    class="s1" dir="ltr">-</td><td class="s1" dir="ltr">JSON -
+                    data of all movies</td></tr><tr style='height:20px;'><th
+                    id="0R2" style="height: 20px;"
+                    class="row-headers-background"><div
+                        class="row-header-wrapper" style="line-height: 20px;">3</div></th><td
+                    class="s1" dir="ltr">Return data (description, genre,
+                    director, image URL, whether it’s featured or not) about a
+                    single movie by title to the user</td><td class="s1"
+                    dir="ltr">/movies/:Title</td><td class="s1" dir="ltr">GET</td><td
+                    class="s1" dir="ltr">-</td><td class="s1" dir="ltr">JSON -
+                    data of 1 movie: title, description, genre, director, image
+                    URL, featured (all true); example:<br>{<br> id: 1,<br>
+                    Title: &quot;Silence of the Lambs&quot;,<br> Description:<br>
+                    &quot;A short description of the movie.&quot;,<br> Genre: {<br>
+                    Name: &quot;Thriller&quot;,<br> Description:<br> &quot;A
+                    short description of the genre.&quot;,<br> },<br> Director:
+                    {<br> Name: &quot;Jonathan Demme&quot;,<br> Bio:<br> &quot;A
+                    short bio of the director.&quot;,<br> Birth:
+                    &quot;1944&quot;,<br> Death: &quot;2017&quot;,<br> },<br><br>
+                    <a target="_blank" href="http://image.com/image"> ImagePath:<br>
+                    </a> &quot;<span
+                        style="text-decoration:underline;-webkit-text-decoration-skip:none;text-decoration-skip-ink:none;color:#1155cc;">image.com/image</span>.jpg&quot;,<br>
+                    Featured: true,<br> },</td></tr><tr style='height:20px;'><th
+                    id="0R3" style="height: 20px;"
+                    class="row-headers-background"><div
+                        class="row-header-wrapper" style="line-height: 20px;">4</div></th><td
+                    class="s1" dir="ltr">Return data about a genre (description)
+                    by name/title (e.g., “Thriller”)</td><td class="s1"
+                    dir="ltr">/movies/genre/:Name</td><td class="s1" dir="ltr">GET</td><td
+                    class="s1" dir="ltr">-</td><td class="s1" dir="ltr">Text - a
+                    short description of the genre</td></tr><tr
+                style='height:20px;'><th id="0R4" style="height: 20px;"
+                    class="row-headers-background"><div
+                        class="row-header-wrapper" style="line-height: 20px;">5</div></th><td
+                    class="s1" dir="ltr">Return data about a director (bio,
+                    birth year, death year) by name</td><td class="s1"
+                    dir="ltr">/movies/director/:Name</td><td class="s1"
+                    dir="ltr">GET</td><td class="s1" dir="ltr">-</td><td
+                    class="s1" dir="ltr">JSON - data of 1 director; example:<br>
+                    Director: {
+                    <br> Name: &quot;Jonathan Demme&quot;,
+                    <br> Bio:
+                    <br> &quot;A short bio of the director.&quot;,
+                    <br> Birth: &quot;1944&quot;,
+                    <br> Death: &quot;2017&quot;,
+                    <br> }</td></tr><tr style='height:20px;'><th id="0R5"
+                    style="height: 20px;" class="row-headers-background"><div
+                        class="row-header-wrapper" style="line-height: 20px;">6</div></th><td
+                    class="s1" dir="ltr">Allow new users to register</td><td
+                    class="s1" dir="ltr">/users</td><td class="s1" dir="ltr">POST</td><td
+                    class="s1" dir="ltr">JSON - data of user to add; example:<br>{
+                    <br> Username: &quot;Hannah Keating&quot;,
+                    <br> Password: &quot;1234&quot;,
+                    <br> Email: &quot;h.monet1104@gmail.com&quot;,
+                    <br> Birthday: &quot;11/04/1990&quot;,
+                    <br> FavoriteMovies: [],
+                    <br> }</td><td class="s1" dir="ltr">JSON - data of added
+                    user, including ID; example:<br>{
+                    <br> id: 1,
+                    <br> Username: &quot;Hannah Keating&quot;,
+                    <br> Password: &quot;1234&quot;,
+                    <br> Email: &quot;h.monet1104@gmail.com&quot;,
+                    <br> Birthday: &quot;11/04/1990&quot;,
+                    <br> FavoriteMovies: [],
+                    <br> }</td></tr><tr style='height:20px;'><th id="0R6"
+                    style="height: 20px;" class="row-headers-background"><div
+                        class="row-header-wrapper" style="line-height: 20px;">7</div></th><td
+                    class="s1" dir="ltr">Allow users to update their user info
+                    (username, password, email, date of birth) - username</td><td
+                    class="s1" dir="ltr">/users/:Username</td><td class="s1"
+                    dir="ltr">PUT</td><td class="s1" dir="ltr">-</td><td
+                    class="s1" dir="ltr">Text confirming updated information</td></tr><tr
+                style='height:20px;'><th id="0R7" style="height: 20px;"
+                    class="row-headers-background"><div
+                        class="row-header-wrapper" style="line-height: 20px;">8</div></th><td
+                    class="s1" dir="ltr">Allow users to add a movie to their
+                    list of favorites</td><td class="s1" dir="ltr">/users/:Username/movies/:MovieID</td><td
+                    class="s1" dir="ltr">POST</td><td class="s1" dir="ltr">JSON
+                    - name of movie to add</td><td class="s1" dir="ltr">Text
+                    confirming 1 updated favorite</td></tr><tr
+                style='height:20px;'><th id="0R8" style="height: 20px;"
+                    class="row-headers-background"><div
+                        class="row-header-wrapper" style="line-height: 20px;">9</div></th><td
+                    class="s1" dir="ltr">Allow users to remove a movie from
+                    their list of favorites</td><td class="s1" dir="ltr">/users/:Username/movies/:MovieID</td><td
+                    class="s1" dir="ltr">DELETE</td><td class="s1" dir="ltr">-</td><td
+                    class="s1" dir="ltr">Text confirming 1 deleted favorite</td></tr><tr
+                style='height:20px;'><th id="0R9" style="height: 20px;"
+                    class="row-headers-background"><div
+                        class="row-header-wrapper" style="line-height: 20px;">10</div></th><td
+                    class="s1" dir="ltr">Allow existing users to deregister</td><td
+                    class="s1" dir="ltr">/users/:Username</td><td class="s1"
+                    dir="ltr">DELETE</td><td class="s1" dir="ltr">-</td><td
+                    class="s1" dir="ltr">Text confirming deleted username</td></tr></tbody></table></div>
+<script type='text/javascript' nonce="s55qrSEXn2Eps6tc+TKAcA">
+function posObj(sheet, id, row, col, x, y) {
+  var rtl = false;
+  var sheetElement = document.getElementById(sheet);
+  if (!sheetElement) {
+    sheetElement = document.getElementById(sheet + '-grid-container');
+  }
+  if (sheetElement) {
+    rtl = sheetElement.getAttribute('dir') == 'rtl';
+  }
+  var r = document.getElementById(sheet+'R'+row);
+  var c = document.getElementById(sheet+'C'+col);
+  if (r && c) {
+    var objElement = document.getElementById(id);
+    var s = objElement.style;
+    var t = y;
+    while (r && r != sheetElement) {
+      t += r.offsetTop;
+      r = r.offsetParent;
+    }
+    var offsetX = x;
+    while (c && c != sheetElement) {
+      offsetX += c.offsetLeft;
+      c = c.offsetParent;
+    }
+    if (rtl) {
+      offsetX -= objElement.offsetWidth;
+    }
+    s.left = offsetX + 'px';
+    s.top = t + 'px';
+    s.display = 'block';
+    s.border = '1px solid #000000';
+  }
+};
+function posObjs() {
+};
+posObjs();</script>
