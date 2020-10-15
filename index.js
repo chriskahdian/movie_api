@@ -18,6 +18,9 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something broke!");
 });
 app.use(bodyParser.json());
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
 //ENDPOINTS
 
 //GET homepage
@@ -31,6 +34,7 @@ app.get("/", function (req, res) {
 // });
 app.get(
   '/movies',
+  passport.authenticate('jwt', { session: false }),
   (req, res) => {
     //res.json(topmovies);
     Movies.find()
