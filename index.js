@@ -1,5 +1,5 @@
-const express = require("express"),
-const app = express(),
+const express = require("express");
+const app = express();
 const cors = require('cors');
 const {check, validationResult} = require('express-validator');
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
