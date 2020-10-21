@@ -1,0 +1,58 @@
+{
+    "_id" : ObjectId("5f7a6c60b7cd851f48b9039a"),
+    "Username" : "user02",
+    "Password" : "pass02",
+    "Email" : "email02@email.com",
+    "Birthdate" : "1990-01-01",
+    "FavMovs" : [
+            ObjectId("5f7a68115cd095b136b5dd82")
+    ]
+}
+{
+    "_id" : ObjectId("5f7a6c64b7cd851f48b9039b"),
+    "Username" : "user03",
+    "Password" : "pass03",
+    "Email" : "email03@email.com",
+    "Birthdate" : "1990-01-01",
+    "FavMovs" : [
+            ObjectId("5f7a6931b7cd851f48b90391")
+    ]
+}
+{
+    "_id" : ObjectId("5f7a6c6cb7cd851f48b9039d"),
+    "Username" : "user05",
+    "Password" : "pass05",
+    "Email" : "email05@email.com",
+    "Birthdate" : "1990-01-01",
+    "FavMovs" : [
+            ObjectId("5f7a6939b7cd851f48b90393"),
+            ObjectId("5f7a6935b7cd851f48b90392")
+    ]
+}
+{
+    "_id" : ObjectId("5f84eb2964cbf0012658cb67"),
+    "FavMovs" : [ ],
+    "Username" : "user06",
+    "Password" : "asdf",
+    "Email" : "email06@email.com",
+    "Birthday" : ISODate("1990-01-01T08:00:00Z"),
+    "__v" : 0
+}
+{
+    "_id" : ObjectId("5f88a1c701539808613302aa"),
+    "FavMovs" : [ ],
+    "Username" : "user00",
+    "Password" : "password",
+    "Email" : "chriskahdian@gmail.com",
+    "Birthday" : ISODate("1989-01-07T00:00:00Z"),
+    "__v" : 0
+}
+{
+    "_id" : ObjectId("5f8a0abd59c7dd0136ecff61"),
+    "FavMovs" : [ ],
+    "Username" : "sammy",
+    "Password" : "pass",
+    "Email" : "sammy@email.com",
+    "Birthday" : ISODate("1901-01-01T00:00:00Z"),
+    "__v" : 0
+}

@@ -1,0 +1,5 @@
+mongoimport --uri mongodb+srv://chriskahdian:12345@cluster0.bev82.mongodb.net/MyFlixDB --collection movies --type JSON --file movies.json
+mongoimport --uri mongodb+srv://chriskahdian:12345@cluster0.bev82.mongodb.net/MyFlixDB --collection users --type JSON --file users.json
+
+
+

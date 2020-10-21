@@ -1,0 +1,123 @@
+{
+    "_id" : ObjectId("5f7a67c25cd095b136b5dd81"),
+    "Title" : "The Shining",
+    "Director" : {
+            "Name" : "Stanley Kubrick",
+            "Bio" : "An American director, born in 1928 and died in 1999, commonly named one of the best filmmakers ever."
+    },
+    "Genre" : {
+            "Name" : "Horror",
+            "Description" : "A genre meant to scare viewers"
+    }
+}
+{
+    "_id" : ObjectId("5f7a68115cd095b136b5dd82"),
+    "Title" : "2001: A Space Odyssey",
+    "Director" : {
+            "Name" : "Stanley Kubrick",
+            "Bio" : "An American director, born in 1928 and died in 1999, frequently named one of the best filmmakers ever."
+    },
+    "Genre" : {
+            "Name" : "Sci-Fi",
+            "Description" : "A genre dealing with questions of science"
+    }
+}
+{
+    "_id" : ObjectId("5f7a6931b7cd851f48b90391"),
+    "Title" : "Silence of the Lambs",
+    "Director" : {
+            "Name" : "Jonathan Demme",
+            "Bio" : "An American director, born in 1944 and died in 2017, known for SIlence of the Lambs"
+    },
+    "Genre" : {
+            "Name" : "Horror",
+            "Description" : "A genre meant to scare viewers"
+    }
+}
+{
+    "_id" : ObjectId("5f7a6935b7cd851f48b90392"),
+    "Title" : "Inglorious Basterds",
+    "Director" : {
+            "Name" : "Quentin Tarantino",
+            "Bio" : "An American director, born in 1963, known for unconventional an often strange storytelling."
+    },
+    "Genre" : {
+            "Name" : "Drama",
+            "Description" : "A genre dealing with character development and story progression"
+    }
+}
+{
+    "_id" : ObjectId("5f7a6939b7cd851f48b90393"),
+    "Title" : "Pulp Fiction",
+    "Director" : {
+            "Name" : "Quentin Tarantino",
+            "Bio" : "An American director, born in 1963, known for unconventional an often strange storytelling."
+    },
+    "Genre" : {
+            "Name" : "Drama",
+            "Description" : "A genre dealing with character development and story progression"
+    }
+}
+{
+    "_id" : ObjectId("5f7a693cb7cd851f48b90394"),
+    "Title" : "Jurassic Park",
+    "Director" : {
+            "Name" : "Steven Spielberg",
+            "Bio" : "An American director, born in 1946, known for high production value films."
+    },
+    "Genre" : {
+            "Name" : "Sci-Fi",
+            "Description" : "A genre dealing with questions of science"
+    }
+}
+{
+    "_id" : ObjectId("5f7a6942b7cd851f48b90395"),
+    "Title" : "Jaws",
+    "Director" : {
+            "Name" : "Steven Spielberg",
+            "Bio" : "An American director, born in 1946, known for high production value films."
+    },
+    "Genre" : {
+            "Name" : "Drama",
+            "Description" : "A genre dealing with character development and story progression"
+    }
+}
+{
+    "_id" : ObjectId("5f7a6944b7cd851f48b90396"),
+    "Title" : "Raiders of the Lost Ark",
+    "Director" : {
+            "Name" : "Steven Spielberg",
+            "Bio" : "An American director, born in 1946, known for high production value films."
+    },
+    "Genre" : {
+            "Name" : "Drama",
+            "Description" : "A genre dealing with character development and story progression"
+    }
+}
+{
+    "_id" : ObjectId("5f7a69ebb7cd851f48b90397"),
+    "Title" : "Schindler's List",
+    "Director" : {
+            "Name" : "Steven Spielberg",
+            "Bio" : "An American director, born in 1946, known for high production value films."
+    },
+    "Genre" : {
+            "Name" : "Drama",
+            "Description" : "A genre dealing with character development and story progression"
+    }
+}
+{
+    "_id" : ObjectId("5f7a6ab1b7cd851f48b90398"),
+    "Title" : "ET",
+    "Director" : {
+            "Name" : "Steven Spielberg",
+            "Bio" : "An American director, born in 1946, known for high production value films."
+    },
+    "Genre" : {
+            "Name" : "Drama",
+            "Description" : "A genre dealing with character development and story progression"
+    },
+    "Description" : [
+            "An alien makes human friends."
+    ]
+}
