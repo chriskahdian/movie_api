@@ -1,4 +1,5 @@
 
+const app = express();
 const cors = require('cors');
 const {check, validationResult} = require('express-validator');
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
@@ -31,7 +32,7 @@ mongoose.connect(process.env.CONNECTION_URI, {
 const express = require("express"),
   morgan = require("morgan");
   bodyParser = require('body-parser');
-const app = express();
+
 app.use(express.static("public"));
 app.use(morgan("common"));
 app.use((err, req, res, next) => {
