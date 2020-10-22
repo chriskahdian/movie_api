@@ -1,8 +1,28 @@
 const express = require("express");
-const app = express();
-const cors = require('cors');
+  morgan = require("morgan");
+  bodyParser = require('body-parser');
+  mongoose = require("mongoose");
+  Models = require("./models.js");
+  cors = require('cors');
+  app = express();
+  Movies = Models.Movie;
+  Users = Models.User;
 const {check, validationResult} = require('express-validator');
+// mongoose.connect("mongodb://localhost:27017/MyFlixDB", {
+mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+
+app.use(morgan("common"));
+app.use(express.static("public"));
+app.use(bodyParser.json());
+app.use(cors());
+
+
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
+
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
 app.use(cors({
   origin: (origin, callback) => {
     if(!origin) return callback(null, true);
@@ -15,35 +35,10 @@ app.use(cors({
   }
 }));
 
-/* rest of code goes here*/
-const mongoose = require("mongoose");
-const Models = require("./models.js");
-const Movies = Models.Movie;
-const Users = Models.User;
-// mongoose.connect("mongodb://localhost:27017/MyFlixDB", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-mongoose.connect(process.env.CONNECTION_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const express = require("express"),
-  morgan = require("morgan");
-  bodyParser = require('body-parser');
-const app = express();
-app.use(express.static("public"));
-app.use(morgan("common"));
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
-app.use(bodyParser.json());
-let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
-//ENDPOINTS
 
 //GET homepage
 app.get("/", function (req, res) {
@@ -51,9 +46,6 @@ app.get("/", function (req, res) {
 });
 
 //GET all movies' data
-// app.get("/movies", function (req, res) {
-//   res.json(Movies);
-// });
 app.get(
   '/movies',
   passport.authenticate('jwt', { session: false }),
@@ -71,13 +63,6 @@ app.get(
 );
 
 //GET 1 movie's data
-// app.get("/movies/:Title", (req, res) => {
-//   res.json(
-//     movies.find((movie) => {
-//       return movie.Title === req.params.Title;
-//     })
-//   );
-// });
 app.get(
   '/movies/:Title',
   passport.authenticate('jwt', { session: false }),
@@ -94,13 +79,6 @@ app.get(
 );
 
 //GET 1 director's data
-// app.get("/movies/Director/:Name", (req, res) => {
-//   res.json(
-//     movies.find((movie) => {
-//       return movie.Director.Name === req.params.Name;
-//     })
-//   );
-// });
 app.get(
   '/movies/director/:Director',
   passport.authenticate('jwt', { session: false }),
@@ -116,15 +94,7 @@ app.get(
   }
 );
 
-
 //GET 1 genre's data
-// app.get("/movies/Genre/:Name", (req, res) => {
-//   res.json(
-//     movies.find((movie) => {
-//       return movie.Genre.Name === req.params.Name;
-//     })
-//   );
-// });
 app.get(
   '/movies/genre/:Genre',
   passport.authenticate('jwt', { session: false }),
@@ -180,7 +150,6 @@ app.post('/users',
   }
 );
 
-
 //GET users
 app.get('/users',
 passport.authenticate('jwt', { session: false }),
@@ -212,13 +181,6 @@ app.get(
 );
 
 //PUT user update
-// app.put("/users/:Username", (req, res) => {
-//   res.json(
-//     users.find((user) => {
-//       return user.Username === req.params.Username;
-//     })
-//   );
-// });
 app.put('/users/:Username',
 passport.authenticate('jwt', { session: false }),
 (req, res) => {
@@ -241,12 +203,7 @@ passport.authenticate('jwt', { session: false }),
   });
 });
 
-
 //POST user's 1 new favorite
-// app.post("users/:Username/movies/:MovieID", (req, res) => {
-//   res.status(500).send("Succesfully added movie to favorites!");
-// });
-// replace ":MovieID" w 5f7a67c25cd095b136b5dd81 from ObjectId("5f7a67c25cd095b136b5dd81"),
 app.post('/users/:Username/movies/:MovieID',
 passport.authenticate('jwt', { session: false }),
 (req, res) => {
@@ -264,12 +221,7 @@ passport.authenticate('jwt', { session: false }),
   });
 });
 
-
-
 //DELETE user's 1 favorite
-// app.delete("users/:Username/favorites", (req, res) => {
-//   res.status(500).send("Successfully removed movie from favorites.");
-// });
 app.delete(
   '/users/:Username/movies/:MovieID',
   passport.authenticate('jwt', { session: false }),
@@ -290,11 +242,7 @@ app.delete(
   }
 );
 
-
 //DELETE user
-// app.delete("/users/:Username", (req, res) => {
-//   res.status(500).send("User Deleted.");
-// });
 app.delete(
   '/users/:Username',
   passport.authenticate('jwt', { session: false }),
