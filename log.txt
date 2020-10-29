@@ -1,0 +1,6 @@
+$ git add .
+$ git -m commit "commit message"
+$ heroku create
+$ git push heroku master
+
+$ heroku restart
