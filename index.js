@@ -21,7 +21,7 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-let allowedOrigins = [*];
+let allowedOrigins = "*";
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -47,7 +47,7 @@ app.get("/", function (req, res) {
 
 //GET all movies' data
 app.get(
-  '/movies'
+  '/movies',
   // , passport.authenticate('jwt', { session: false }),
   (req, res) => {
     //res.json(topmovies);
