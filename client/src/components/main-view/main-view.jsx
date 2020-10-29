@@ -2,12 +2,12 @@ import React from 'react';
 import axios from 'axios';
 
 export class MainView extends React.Component {
-    // constructor() {
-    //     //call the superclass constructor so React can initialize
-    //     super();
-    //     //initialize the state to an empty object
-    //     this.state = {};
-    // }
+    constructor() {
+        //call the superclass constructor so React can initialize
+        super();
+        //initialize the state to an empty object
+        this.state = {};
+    }
     // one of the "hooks" available in a React component
     componentDidMount() {
         axios.get('<https://myflix001.herokuapp.com/movies>')
