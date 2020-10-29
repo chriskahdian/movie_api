@@ -1,5 +1,5 @@
 $ git add .
-$ git -m commit "commit message"
+$ git commit -m "commit message"
 $ heroku create
 $ git push heroku master
 
