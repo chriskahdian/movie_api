@@ -5,6 +5,8 @@ $ git push heroku master
 
 $ heroku restart
 
+$parcel src/index.html
+
 2020-10-30
 meeting w Sammy
 questions - 
