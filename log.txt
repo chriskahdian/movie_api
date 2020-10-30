@@ -4,3 +4,10 @@ $ heroku create
 $ git push heroku master
 
 $ heroku restart
+
+2020-10-30
+meeting w Sammy
+questions - 
+-localhost:1234 doesn't display list of movies
+-localhost:1234 - is that supposed to display the main-view? why does main-view get a port? 
+-should I use the build tool again before pushing changes to heroku?

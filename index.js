@@ -17,7 +17,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
@@ -34,6 +33,8 @@ app.use(cors({
     return callback(null, true);
   }
 }));
+
+let auth = require('./auth')(app);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
