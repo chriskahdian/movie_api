@@ -5,7 +5,8 @@ $ git push heroku master
 
 $ heroku restart
 
-$parcel src/index.html
+
+$parcel src/index.html - in client folder
 
 2020-10-30
 meeting w Sammy
@@ -13,3 +14,98 @@ questions -
 -localhost:1234 doesn't display list of movies
 -localhost:1234 - is that supposed to display the main-view? why does main-view get a port? 
 -should I use the build tool again before pushing changes to heroku?
+
+-add to database movies url for image, description 
+
+2020-11-01-1710: got button on movie-view, need to hook it up to change state to go back to main
+
+2020-11-02-1144: trying to figure out how to wire the button to change the state. have found the following relevant code:
+-"main-view.jsx":
+onMovieClick(movie) {
+    this.setState({
+        selectedMovie: movie
+    });
+}
+-maybe I can define that as a function, before using it on the onClick part?
+: movies.map(movie => (<MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>))
+-another example of onClick:
+<div onClick={() => onClick(movie)} className="movie-card">{movie.Title}</div>
+-and the one above uses main-view's onClick method to change the state etc. the problem is, this button isn't going to be something defined on main-view, so it wont be able to use that function; so it'll have to use it in the same file, the movie-view file. Okay, sure, so I need to include that somewhere, and then wire up the button to change the state; but then, will it still change the page... because there must be another function using the state...
+-wait but what tells it to go to movie view though... "main-view.jsx":
+            { selectedMovie
+                ? <MovieView movie={selectedMovie}/>
+                : movies.map(movie => (
+                <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
+                ))
+            }
+-so what is all that code about... finding and re-reading
+-oh, that's all within the render function; and it's conditional. so maybe I just have to copy/paste that part into the movie-view's render function
+-and now, what if it's just render main view... just put main-view in the render function of the movie-view
+-okay so, in the render() for main-view, there's this:
+render() {
+        const {movie} = this.props;
+        if (!movie) return null;
+        return( //movie view)
+-so... just that null there.... that's what I have to change
+-and the button just has to change "(movie)", make it so there's !movie
+-check others' to see if their's show render null changed to render (something)
+-Sammy's is null. shoot all 4 of the other ones too say null. okay well, good time to start looking at their codes I guess...
+-do all 5 use react-bootstrap: 4 do, the other 1 looks like a previous version of 1 of those 4
+-soooo... well it doesn't say anything about react-bootstrap in here...
+-oh okay, this one guy did it like this, inside the render function inside the movie-view:
+return(
+      <div>
+            // other stuff
+            <Link to={`/`}>
+              <Button variant="link">Back</Button>
+            </Link>
+      </div>
+    )
+-and he had imported {link} from something else. So, I think I can just... figure out how to make a link in regular old w/e
+import { Link } from "react-router-dom"
+-the button just has to be a link to '/'
+-okay fine, what did the second one do then...
+-3 of them actually used the link method
+-Sammy's did something else I don't understand
+-BUT - none of them seem to change the state, like the instructions say...
+-Sammy's in "main-view.jsx":
+  buttonFunc() {
+    this.setState({
+      selectedMovie: null,
+    });
+  }
+-Sammy's in "movie-view.jsx"
+render() {
+//...
+    const { movie, buttonPropFromMain, label } = this.props;
+//...
+            <MovieView
+              movie={selectedMovie}
+              buttonPropFromMain={() => this.buttonFunc()}
+              label="Return"
+            />
+//...
+        <Button variant="light" onClick={buttonPropFromMain}>{label}</Button>
+-okay so, he's putting it in the render section of main-view...
+-and "it" is gathering all the things it's going to send to MovieView, which includes now that buttonPropFromMain
+-what that thing does is call the buttonFunc:
+  buttonFunc() {
+    this.setState({
+      selectedMovie: null,
+    });
+  }
+-which was in main-view, which sets the state back to null so that main-view displays.
+-okay so to summarize:
+  -function declared in main-view: buttonFunc: changes state
+  -main-view has MovieView section where it gathers things to send to movie-view
+  -main-view includes in items to send, buttonFunc, as buttonPropFromMain
+  -movie-view has button, includes an onClick that triggers buttonFunc
+
+2020-11-03-1151
+-okay, so, to summarize:
+  X -main-view: buttonFunc: changes state; put right before render()
+  X -main-view: MovieView section: things to send: buttonFunc, as buttonPropFromMain
+  X -movie-view: button with onClick that triggers buttonFunc
+  X -movie-view: render(): include buttonPropFromMain in const {...}
+-running app first to see if it actually works - and yeah, it works
+-YEAH IT WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!
