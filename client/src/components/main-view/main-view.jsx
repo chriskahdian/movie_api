@@ -33,7 +33,7 @@ export class MainView extends React.Component {
         });
     }
     
-    buttonFunc() {
+    clearState() {
         this.setState({
             selectedMovie: null,
         });
@@ -50,7 +50,7 @@ export class MainView extends React.Component {
                 ? 
                     <MovieView
                         movie={selectedMovie}
-                        buttonPropFromMain={() => this.buttonFunc()}
+                        clearState={() => this.clearState()}
                     />
                 :
                     movies.map(movie => (

@@ -31676,18 +31676,18 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       // const {movie} = this.props;
       var _this$props = this.props,
           movie = _this$props.movie,
-          buttonPropFromMain = _this$props.buttonPropFromMain;
+          clearState = _this$props.clearState;
       if (!movie) null;
       return _react.default.createElement("div", {
         className: "movie-view"
       }, _react.default.createElement("img", {
         className: "movie-poster",
-        src: movie.ImagePath
+        src: movie.ImageURL
       }), _react.default.createElement("div", {
         className: "movie-title"
       }, _react.default.createElement("span", {
         className: "label"
-      }, "Title: "), _react.default.createElement("span", {
+      }, "Title: ", movie.Title), _react.default.createElement("span", {
         className: "value"
       }, movie.Description)), _react.default.createElement("div", {
         className: "movie-genre"
@@ -31702,7 +31702,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, "Director: "), _react.default.createElement("span", {
         className: "value"
       }, movie.Director.Name)), _react.default.createElement("div", null, _react.default.createElement("button", {
-        onClick: buttonPropFromMain
+        onClick: clearState
       }, "Back to Main")));
     }
   }]);
@@ -31794,8 +31794,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "buttonFunc",
-    value: function buttonFunc() {
+    key: "clearState",
+    value: function clearState() {
       this.setState({
         selectedMovie: null
       });
@@ -31817,8 +31817,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         className: "main-view"
       }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie,
-        buttonPropFromMain: function buttonPropFromMain() {
-          return _this3.buttonFunc();
+        clearState: function clearState() {
+          return _this3.clearState();
         }
       }) : movies.map(function (movie) {
         return _react.default.createElement(_movieCard.MovieCard, {
@@ -31997,7 +31997,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54036" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55824" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

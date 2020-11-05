@@ -1,6 +1,7 @@
 $ git add .
 $ git commit -m "commit message"
 $ heroku create
+$ git push
 $ git push heroku master
 
 $ heroku restart
@@ -109,3 +110,13 @@ render() {
   X -movie-view: render(): include buttonPropFromMain in const {...}
 -running app first to see if it actually works - and yeah, it works
 -YEAH IT WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+2020-11-03-1500 meeting w Sammy
+-add to database movies url for image, description
+X -review rest of database; some things (title) are missing in movie-view in app - FIXED had variable name wrong
+
+2020-11-04-1053
+-working through 3.4 all day
+
+2020-11-04-1752
+-creating login-view file; updated w useState; created temp login situation

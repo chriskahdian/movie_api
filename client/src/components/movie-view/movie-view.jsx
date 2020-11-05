@@ -7,13 +7,13 @@ export class MovieView extends React.Component {
     }
     render() {
         // const {movie} = this.props;
-        const {movie, buttonPropFromMain} = this.props;
+        const {movie, clearState} = this.props;
         if (!movie) null;
         return(
             <div className="movie-view">
-                <img className="movie-poster" src={movie.ImagePath}/>
+                <img className="movie-poster" src={movie.ImageURL}/>
                 <div className="movie-title">
-                    <span className="label">Title: </span>
+                    <span className="label">Title: {movie.Title}</span>
                     <span className="value">{movie.Description}</span>
                 </div>
                 <div className="movie-genre">
@@ -25,7 +25,7 @@ export class MovieView extends React.Component {
                     <span className="value">{movie.Director.Name}</span>
                 </div>
                 <div>
-                    <button onClick={buttonPropFromMain}>Back to Main</button>
+                    <button onClick={clearState}>Back to Main</button>
                 </div>
             </div>
         );
