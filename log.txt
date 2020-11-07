@@ -120,3 +120,26 @@ X -review rest of database; some things (title) are missing in movie-view in app
 
 2020-11-04-1752
 -creating login-view file; updated w useState; created temp login situation
+-implementing login-view code on main-view
+-implementing prop-types
+-stuck on getting app to work at this point. console log gives an error when I try to log in w fake credentials like the text says: _this3.onLoggedIn is not a function. not sure how to handle... reviewed code several times
+
+2020-11-06-1213: started for the day
+2020-11-06-1255: found what was wrong; was missing the following in main-view, right before render function:
+    onLoggedIn(user) {
+        this.setState({
+            user
+        });
+    }
+-it did say function was undefined... but I thought it was saying that and matching up what was in the lesson, cus the text also says there should be that error. But I guess for a different reason than  just not defining it, like I did
+
+2020-11-06-1613: pausing on the lesson to actually fix up the database:
+-add to database movies url for image, description
+2020-11-06-1643: done with that
+2020-11-06-1705: hard studying; got to task, closing down
+
+2020-11-07-1020: working on registration-view
+-was able to make the actual component, but need to find a way to integrate into main-view. Sammy's example does ctrl+f anything for "reg" in main-view
+-Sammy - turn in task without integrating registration-view to main-view
+
+

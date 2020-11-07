@@ -14,7 +14,6 @@ export class MovieView extends React.Component {
                 <img className="movie-poster" src={movie.ImageURL}/>
                 <div className="movie-title">
                     <span className="label">Title: {movie.Title}</span>
-                    <span className="value">{movie.Description}</span>
                 </div>
                 <div className="movie-genre">
                     <span className="label">Genre: </span>
@@ -23,6 +22,10 @@ export class MovieView extends React.Component {
                 <div className="movie-director">
                     <span className="label">Director: </span>
                     <span className="value">{movie.Director.Name}</span>
+                </div>
+                <div className="movie-description">
+                    <span className="label">Description: </span>
+                    <span className="value">{movie.Description}</span>
                 </div>
                 <div>
                     <button onClick={clearState}>Back to Main</button>

@@ -1,5 +1,5 @@
 //using useState
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 export function LoginView(props) {
     const [ username, setUsername ] = useState('');
@@ -9,7 +9,7 @@ export function LoginView(props) {
         e.preventDefault();
         console.log(username, password);
         //send request to server for auth, then call props.onLoggedIn(username) below
-        //props.onLoggedIn(username);
+        props.onLoggedIn(username);
     };
 
     return (
@@ -22,7 +22,7 @@ export function LoginView(props) {
                 Password:
                 <input type="password" value={password} onChange= {e => setPassword (e.target.value)} />
             </label>
-            <button type ="button" onClick={handleSubmit}>Submit</button>
+            <button type="button" onClick={handleSubmit}>Submit</button>
         </form>
     );
 }

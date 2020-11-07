@@ -1,67 +1,84 @@
-import React from 'react';
-import axios from 'axios';
-import {MovieCard} from '../movie-card/movie-card';
-import {MovieView} from '../movie-view/movie-view';
+import React from "react";
+import axios from "axios";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+
+import { LoginView } from "../login-view/login-view";
+import { RegistrationView } from "../registration-view/registration-view";
+import { MovieCard } from "../movie-card/movie-card";
+import { MovieView } from "../movie-view/movie-view";
 
 export class MainView extends React.Component {
-    constructor() {
-        //call the superclass constructor so React can initialize
-        super();
-        //initialize the state to an empty object
-        this.state = {
-            movies:null,
-            selectedMovie: null
-        };
-    }
-    // one of the "hooks" available in a React component
-    componentDidMount() {
-        axios.get('https://myflix001.herokuapp.com/movies')
-            .then(response => {
-                //assign the result to the state
-                this.setState({
-                    movies:response.data
-                });
-            })
-            .catch(function(error){
-                console.log(error);
-            });
-    }
+  constructor() {
+    super();
+    this.state = {
+      movies: null,
+      selectedMovie: null,
+      user: null,
+    };
+  }
 
-    onMovieClick(movie) {
+  componentDidMount() {
+    axios
+      .get("https://myflix001.herokuapp.com/movies")
+      .then((response) => {
+        //assign the result to the state
         this.setState({
-            selectedMovie: movie
+          movies: response.data,
         });
-    }
-    
-    clearState() {
-        this.setState({
-            selectedMovie: null,
-        });
-    }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
-    render() {
-        //if the state isn't initialized, this will throw on runtime before data initially loads
-        const {movies, selectedMovie} = this.state;
-        //before the movies have been loaded
-        if(!movies) return <div className = "main-view"/>;
-        return (
-            <div className="main-view">
-            { selectedMovie
-                ? 
-                    <MovieView
-                        movie={selectedMovie}
-                        clearState={() => this.clearState()}
-                    />
-                :
-                    movies.map(movie => (
-                        <MovieCard
-                            key={movie._id}
-                            movie={movie}
-                            onClick={movie => this.onMovieClick(movie)}
-                        />
+  onMovieClick(movie) {
+    this.setState({
+      selectedMovie: movie,
+    });
+  }
+
+  clearState() {
+    this.setState({
+      selectedMovie: null,
+    });
+  }
+
+  onLoggedIn(user) {
+    this.setState({
+      user,
+    });
+  }
+
+  render() {
+    const { movies, selectedMovie, user } = this.state;
+    if (!user)
+      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
+    if (!movies) return <div className="main-view" />;
+    return (
+      <div className="main-view">
+        <Container>
+          <Row>
+            {/* <Col> */}
+              {selectedMovie ? (
+                <MovieView
+                  movie={selectedMovie}
+                  clearState={() => this.clearState()}
+                />
+              ) : (
+                movies.map((movie) => (
+                  <MovieCard
+                    key={movie._id}
+                    movie={movie}
+                    onClick={(movie) => this.onMovieClick(movie)}
+                  />
                 ))
-            }
-            </div>
-        );
-    }
+              )}
+            {/* </Col> */}
+          </Row>
+        </Container>
+      </div>
+    );
+  }
 }
