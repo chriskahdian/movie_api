@@ -1,32 +1,36 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import React from "react";
+import PropTypes from "prop-types";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
+
 
 export class MovieCard extends React.Component {
-    render() {
-        const {movie, onClick} = this.props;
-        return (
-//REACT-BOOTSTRAP COMPONENTS
-            <Card style={{width:'16rem'}}>
-                <Card.Img variant="top" src={movie.ImageURL}/>
-                <Card.Body>
-                    <Card.Title>{movie.Title}</Card.Title>
-                    <Card.Text>{movie.Description}</Card.Text>
-                    <Button onClick={ () => onClick(movie)} variant="link">Open</Button>
-                </Card.Body>
-            </Card>
-        );
-    }
+  render() {
+    const { movie, onClick } = this.props;
+    return (
+      //REACT-BOOTSTRAP COMPONENTS
+      <Card style={{ width: "16rem" }}>
+        <Card.Img variant="top" src={movie.ImageURL} />
+        <Card.Body>
+          <Card.Title>{movie.Title}</Card.Title>
+          <Card.Text>{movie.Description}</Card.Text>
+          <Link to={`/movies/${movie._id}`}>
+            <Button variant="primary">Open</Button>
+          </Link>
+        </Card.Body>
+      </Card>
+    );
+  }
 }
 
 //HTML COMPONENTS
 //stuff for HTML components (would go under render() { ... return ( )}, instead of card stuff)
-            // <div
-            // onClick={() => onClick(movie)}
-            // className="movie-card">
-            //     {movie.Title}
-            // </div>
+// <div
+// onClick={() => onClick(movie)}
+// className="movie-card">
+//     {movie.Title}
+// </div>
 //actual component - would go down here at bottom
 // MovieCard.propTypes = {
 //     movie: PropTypes.shape({
