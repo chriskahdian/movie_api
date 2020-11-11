@@ -16,7 +16,6 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(cors());
 
-
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
@@ -49,7 +48,7 @@ app.get("/", function (req, res) {
 //GET all movies' data
 app.get(
   '/movies',
-  // , passport.authenticate('jwt', { session: false }),
+  passport.authenticate('jwt', { session: false }),
   (req, res) => {
     //res.json(topmovies);
     Movies.find()

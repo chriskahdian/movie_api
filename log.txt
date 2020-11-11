@@ -142,4 +142,76 @@ X -review rest of database; some things (title) are missing in movie-view in app
 -was able to make the actual component, but need to find a way to integrate into main-view. Sammy's example does ctrl+f anything for "reg" in main-view
 -Sammy - turn in task without integrating registration-view to main-view
 
+2020-11-09-1203: starting 3.5
+-followed to a point where I updated the login-view and was asked to log in with an incorrect user to see the error, which I did; then I was to try logging in with an existing user, which I did, and it's still returning an error (found user from database);
+-checking login-view updated code...
+-still going over it but I want to also check the API endpoints in the index.js file
+-oh wait dude look. the api url. https://myflix001.herokuapp.com/login. I should change that to localhost:1234
+-okay, none of that worked..... would have been nice.
+-well then what if I set it up in Heroku to troubleshoot it there...
+-what if I change the url to nothing - okay it still says no such user
+-okay but in the example though they have the url as localhost so yeah gonna change that
+-I'm going to try manually adding in a user into the database and see if it works.
+-nope, username test password test doesn't work that way...
+-okay to summarize so far: 
+-can't log in;
+-changed API URL from heroku to local;
+-reviewed code, found nothing wrong;
+-manually added user/pass to db, didn't work;
+-will try rolling back login to generic, getting it from my github's last task commit
+-okay yeah it works with the last's ones still... hmm.
+-so it just has to be something in the code...
+-so now I'm comparing the 3.4 and 3.5 versions to see what I can find that might be important
+-what if it's the form; try using the form from 3.4; it's the return() part of the function
+-no it still does the same thing.
+-okay but now the problem is isolated here, in this clause:
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:1234/login', {
+            Username: username,
+            Password: password
+        })
+        .then(response => {
+            const data = response.data;
+            props.onLoggedIn(data);
+        })
+        .catch(e => {
+            console.log('no such user')
+        });
+    };
+-okay gonna break here
+-2020-11-09-1709: what if I change "data" back to "username"... in props.onLoggedIn()
+-nnnnope, still nothing...
+-gonna try testing it with postman...
+-nothing new. tried with localhost and heroku. heroku works as expected, and I might be able to see it's logs if I update and push the app there...
+-updating heroku
+-still doesn't work. testing through postman. with test test, it says wrong password; with test1 test, it says wrong username, so it detects usernames.
+-I guess I'm going to try one of the weird ones that was all mashed up...
+Username
+:
+"sammy2"
+Password
+:
+"$2b$10$bKkpzfPy1v2nh8w8U/H4zunUZsAUL/W1oMRBSMD6eTMuGMyh5.iO2"
+-nope, still doesn't work...
 
+-2020-11-10-1126: summarize where I'm stuck and what I've done to try to fix:
+-can't log in;
+-changed API URL from heroku to local;
+-reviewed code, found nothing wrong;
+-manually added user/pass to db, didn't work;
+-tried using 3.4's version of login-view, it works;
+-3.4's version works with 3.5's version of login-view, so:
+-problem is in handleSubmit;
+-tried changing props.onLoggedIn() to username instead of data, didn't work;
+-tested with postman and heroku to check heroku's logs; with a valid username, it says wrong password; with an invalid username, it says invalid username; so:
+-Heroku logs show it can detect the username at least
+-QUESTION - can I see parcel's logs how I can see heroku's?
+-no
+-meeting with Sammy
+-couldn't log in because it needed a hashed password. created a new user in postman and it hashed the password then we were able to log in with that.
+-rcc + enter - inserts blank class object named after file
+-control + d - way of selecting multiple things in VSCode; highlight your selection then press ctrl+d and it'll select the next one also for you.
+-2020-11-10-1845: now just going to continue on in the lesson
+
+-2020-11-11-: continuing on in lesson
