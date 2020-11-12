@@ -39696,9 +39696,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
   _createClass(MovieCard, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          movie = _this$props.movie,
-          onClick = _this$props.onClick;
+      var movie = this.props.movie;
       return (//REACT-BOOTSTRAP COMPONENTS
         _react.default.createElement(_Card.default, {
           style: {
@@ -39836,13 +39834,21 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "label"
       }, "Genre: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Genre.Name)), _react.default.createElement("div", {
+      }, movie.Genre.Name), _react.default.createElement(_reactRouterDom.Link, {
+        to: "/genres/".concat(movie.Genre.Name)
+      }, _react.default.createElement(_Button.default, {
+        variant: "link"
+      }, "Genre"))), _react.default.createElement("div", {
         className: "movie-director"
       }, _react.default.createElement("span", {
         className: "label"
       }, "Director: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Name)), _react.default.createElement("div", {
+      }, movie.Director.Name), _react.default.createElement(_reactRouterDom.Link, {
+        to: "/directors/".concat(movie.Director.Name)
+      }, _react.default.createElement(_Button.default, {
+        variant: "link"
+      }, "Director"))), _react.default.createElement("div", {
         className: "movie-description"
       }, _react.default.createElement("span", {
         className: "label"
@@ -40370,7 +40376,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this);
     _this.state = {
-      movies: null,
+      movies: [],
       selectedMovie: null,
       user: null
     };
@@ -40380,11 +40386,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   _createClass(MainView, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var accessToken = localStorage.getItem('token');
+      var accessToken = localStorage.getItem("token");
 
       if (accessToken !== null) {
         this.setState({
-          user: localStorage.getItem('user')
+          user: localStorage.getItem("user")
         });
         this.getMovies(accessToken);
       }
@@ -40423,8 +40429,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       this.setState({
         user: authData.user.Username
       });
-      localStorage.setItem('token', authData.token);
-      localStorage.setItem('user', authData.user.Username);
+      localStorage.setItem("token", authData.token);
+      localStorage.setItem("user", authData.user.Username);
       this.getMovies(authData.token);
     }
   }, {
@@ -40432,7 +40438,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function getMovies(token) {
       var _this2 = this;
 
-      _axios.default.get('https://myflix001.herokuapp.com/movies', {
+      _axios.default.get("https://myflix001.herokuapp.com/movies", {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -40448,9 +40454,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "logOut",
     value: function logOut() {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      localStorage.removeItem('id');
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("id");
       this.setState({
         user: null
       });
@@ -40465,16 +40471,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      // let { movies } = this.props;
-      // let { user } = this.state;
       var _this$state = this.state,
           movies = _this$state.movies,
           user = _this$state.user;
-      if (!user) return _react.default.createElement(_loginView.LoginView, {
-        onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
-        }
-      });
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
@@ -40522,6 +40521,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         exact: true,
         path: "/",
         render: function render() {
+          if (!user) return _react.default.createElement(_loginView.LoginView, {
+            onLoggedIn: function onLoggedIn(user) {
+              return _this3.onLoggedIn(user);
+            }
+          });
           return movies.map(function (m) {
             return _react.default.createElement(_movieCard.MovieCard, {
               key: m._id,
@@ -40813,7 +40817,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55419" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63199" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

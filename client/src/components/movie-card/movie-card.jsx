@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onClick } = this.props;
+    const { movie } = this.props;
     return (
       //REACT-BOOTSTRAP COMPONENTS
       <Card style={{ width: "16rem" }}>

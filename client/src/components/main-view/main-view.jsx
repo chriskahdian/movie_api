@@ -3,35 +3,35 @@ import axios from "axios";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Button from 'react-bootstrap/Button';
-import Navbar from 'react-bootstrap/Navbar';
+import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
 
 import { LoginView } from "../login-view/login-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
-import { BrowserRouter as Router, Route} from "react-router-dom";
-import { About } from '../header/about';
-import { Contact } from '../header/contact';
-import { ProfileView } from '../profile-view/profile-view';
-import { UpdateView } from '../update-view/update-view';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { About } from "../header/about";
+import { Contact } from "../header/contact";
+import { ProfileView } from "../profile-view/profile-view";
+import { UpdateView } from "../update-view/update-view";
+import { Link } from "react-router-dom";
 
 export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: null,
+      movies: [],
       selectedMovie: null,
       user: null,
     };
   }
 
   componentDidMount() {
-    let accessToken = localStorage.getItem('token');
+    let accessToken = localStorage.getItem("token");
     if (accessToken !== null) {
       this.setState({
-        user: localStorage.getItem('user')
+        user: localStorage.getItem("user"),
       });
       this.getMovies(accessToken);
     }
@@ -66,33 +66,34 @@ export class MainView extends React.Component {
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
-      user: authData.user.Username
+      user: authData.user.Username,
     });
-  
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
+
+    localStorage.setItem("token", authData.token);
+    localStorage.setItem("user", authData.user.Username);
     this.getMovies(authData.token);
   }
 
   getMovies(token) {
-    axios.get('https://myflix001.herokuapp.com/movies', {
-      headers: { Authorization: `Bearer ${token}`}
-    })
-    .then(response => {
-      // Assign the result to the state
-      this.setState({
-        movies: response.data
+    axios
+      .get("https://myflix001.herokuapp.com/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
       });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
   }
 
   logOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    localStorage.removeItem('id');
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("id");
     this.setState({
       user: null,
     });
@@ -105,12 +106,9 @@ export class MainView extends React.Component {
   // }
 
   render() {
-    // let { movies } = this.props;
-    // let { user } = this.state;
     const { movies, user } = this.state;
 
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-    if (!movies) return <div className="main-view"/>;
+    if (!movies) return <div className="main-view" />;
 
     return (
       <Router>
@@ -156,7 +154,18 @@ export class MainView extends React.Component {
           </Navbar>
           {/* Nav end */}
 
-          <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/>
+          <Route
+            exact
+            path="/"
+            render={() => {
+              if (!user)
+                return (
+                  <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+                );
+              return movies.map((m) => <MovieCard key={m._id} movie={m} />);
+            }}
+          />
+
           {/* <Route
             exact
             path="/"
