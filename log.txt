@@ -214,4 +214,49 @@ Password
 -control + d - way of selecting multiple things in VSCode; highlight your selection then press ctrl+d and it'll select the next one also for you.
 -2020-11-10-1845: now just going to continue on in the lesson
 
--2020-11-11-: continuing on in lesson
+-2020-11-12-1230: task for 3.5:
+-create director view
+-create genre view
+-create profile view
+-add "delete user" functionality
+X -display favorites
+-add "delete favorite" functionality
+
+-adding genre-view: so I've opened all the versions of the movie_api in Sammy's github I could find and they're all slightly different which makes them useful for seeing what they have in common, 5 genre-view files and 5 director-view files
+-they can get started with the rcc + enter trick Sammy showed me, naming the item GenreView from genre-view...
+-all 5 verisons add empty array for state
+-all 5 versions have:
+render () { 
+  const { movie, genre } = this.props
+  if (!genre) return null;
+  return (
+    <div>
+      <Container>
+        <Card>
+          <Card.Body>
+            <Card.Title>{genre.Name}</Card.Title>
+            <Card.Text>Description: {genre.Description}</Card.Text>
+            <Link to={'/'}><button>Back</button></Link>
+          </Card.Body>
+        </Card>
+      </Container>
+    </div>
+  )}
+-okay so I have the genre-view now, sure, but I gotta implement it onto the movie view...
+-5 versions of movie-view available on Sammy's github... 4 of them seem pretty behind, 1 of them is about as complex as mine
+-1 of them has the following:
+Render(){
+  //...
+  return(
+    //...
+    <div className="movie-genre">
+      <span className="label"Description: </span>
+      <Link className="porition-relative" to={'/genres/${movie.Genre.Name}'}>
+        <button>{movie.Genre.Name}</button>
+      </Link>
+    </div>
+    //...
+  )
+}
+-wait, omg I already have this in here, for both genre and director lol. the links on the buttons on the movie-view page
+-okay I can test it out then with Genre
