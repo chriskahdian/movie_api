@@ -15,6 +15,8 @@ import { About } from "../header/about";
 import { Contact } from "../header/contact";
 import { ProfileView } from "../profile-view/profile-view";
 import { UpdateView } from "../update-view/update-view";
+import { GenreView } from "../genre-view/genre-view";
+import { DirectorView } from "../director-view/director-view";
 import { Link } from "react-router-dom";
 
 export class MainView extends React.Component {

@@ -3,9 +3,8 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
-
-
-export default class GenreView extends Component {
+export class GenreView extends Component {
+// export default class GenreView extends Component {
     constructor() {
       super();
       this.state = {};
@@ -19,8 +18,8 @@ export default class GenreView extends Component {
                 <Container>
                     <Card>
                     <Card.Body>
-                        <Card.Title>{genre.Name}</Card.Title>
-                        <Card.Text>Description: {genre.Description}</Card.Text>
+                        <Card.Title>{genre.Genre.Name}</Card.Title>
+                        <Card.Text>{genre.Genre.Description}</Card.Text>
                         <Link to={'/'}><button>Back</button></Link>
                     </Card.Body>
                     </Card>

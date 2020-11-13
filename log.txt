@@ -260,3 +260,72 @@ Render(){
 }
 -wait, omg I already have this in here, for both genre and director lol. the links on the buttons on the movie-view page
 -okay I can test it out then with Genre
+-does'nt work. I'm going to upload to Heroku and see if it works then take a break
+-chrome console: main-view.jsx:204 Uncaught ReferenceError: GenreView is not defined
+-okay so I imported it to main-view, sure, but now I get this: in chrome console
+-React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+-noticed the difference in genre-view "export default class//..." vs any other component "expot class//..."
+-removed the "default" but it then displays the movie description instead
+-so if this is right, it's just displaying the wrong thing...
+-wait maybe my database doesn't have genre.name
+-These are what is displaying wrong:
+                        <Card.Title>{genre.Name}</Card.Title>
+                        <Card.Text>Description: {genre.Description}</Card.Text>
+-it doesn't show the genre name, and it shows the movie description instead of genre's
+-checking if db actually has those: it does...
+-so {genre.Name}... maybe the G should be capital: doesn't work
+-maybe include in render function "genre" as paramter to pass on? in const {} = this.props - no didn't work
+-also maybe import prop-types to genre-view - nope
+-okay, so, let's take another look at this... 
+-it doesn't display anything for genre.Name, 
+-but it displays the movie's description for genre.Descrtiption
+-try changing genre.Descrtiption to any other movie key:
+-genre.Title brings up movie Title!
+-so it's really probably just reading the wrong thing, but what's causing that...
+-it has to be the {genre...} part of it. why does it think that returns.... that..... maybe I got he code wrong
+-well maybe because it's defining genre by the props:
+cont { movie, genre } = this.props
+-what if I change the API endpoint: it says /movies/genre/:Genre
+-but the button in movie-view says /genres/:genre
+-what if I instead chagne the button in movie-view - nope, bad lol
+-wait should I import movie-view? maybe? I'll try: nope
+-how does genre-view even get called though.... where does it list that?
+-it is the Link in movie-view for genre.... /genres/:Genre, cus we're already on /movies
+-okay so now to look at the API again...
+app.get(
+  '/movies/genre/:Genre',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Movies.findOne({ 'Genre.Name': req.params.Genre })
+      .then(movie => {
+        res.json(movie.Genre);
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
+  }
+);
+-line res.json(movie.Genre) - changing to genre: nope, nothing
+-well okay so look, if {genre.Title} displays movie title, what about:
+-{genre.Genre.Name} - yeah! it said horror
+-{genre.Genre.Descrtiption} - YEAH IT WORKSSSSSSSS
+-Okay great so it works like this:
+<Card.Title>{genre.Genre.Name}</Card.Title>
+<Card.Text>{genre.Genre.Description}</Card.Text>
+<Link to={'/'}><button>Back</button></Link>
+-it was a lot simpler than I thought..... glad I could figure that out
+-gonna take a break and now the director one should be easy
+
+-2020-11-12-1716: okay, time to put the director-view together...
+-QUESTION about these - I needed to take the "default" out of the rcc+enter; why is it {genre.Genre.Description}?
+-okay nice I got the director part working too! okay review requirements:
+-task for 3.5:
+X -create director view
+X -create genre view
+X -create profile view
+X -add "delete user" functionality
+X -display favorites
+X -add "delete favorite" functionality
+
+yeah it's all there, okay I'm going to turn it in then...
