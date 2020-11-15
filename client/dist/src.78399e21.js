@@ -39806,7 +39806,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         }
       }).then(function (response) {
         console.log(response);
-        window.open("/client", "_self");
+        window.open("/", "_self");
       });
     }
   }, {
@@ -39859,9 +39859,9 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         onClick: function onClick() {
           return _this2.addFavorite(movie);
         }
-      }, "Add Favorite")), _react.default.createElement("div", null, _react.default.createElement("button", {
-        onClick: clearState
-      }, "Back to Main")));
+      }, "Add Favorite")), _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.Link, {
+        to: '/'
+      }, _react.default.createElement("button", null, "Back"))));
     }
   }]);
 
@@ -51626,8 +51626,8 @@ var GenreView = /*#__PURE__*/function (_Component) {
       var _this$props = this.props,
           movie = _this$props.movie,
           genre = _this$props.genre;
-      if (!genre) return null;
-      return _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, genre.Genre.Name), _react.default.createElement(_Card.default.Text, null, genre.Genre.Description), _react.default.createElement(_reactRouterDom.Link, {
+      if (!movie) return null;
+      return _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, movie.Genre.Name), _react.default.createElement(_Card.default.Text, null, movie.Genre.Description), _react.default.createElement(_reactRouterDom.Link, {
         to: '/'
       }, _react.default.createElement("button", null, "Back"))))));
     }
@@ -51906,7 +51906,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         className: "navbar-brand"
       }, _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
-      }, "Victorville Film Archives")), _react.default.createElement(_Navbar.default.Toggle, {
+      }, "myFlix001")), _react.default.createElement(_Navbar.default.Toggle, {
         "aria-controls": "basic-navbar-nav",
         className: "bg-light"
       }), _react.default.createElement(_Navbar.default.Collapse, {
@@ -51916,7 +51916,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         to: "/"
       }, _react.default.createElement(_Button.default, {
         variant: "link"
-      }, "login")), _react.default.createElement(_reactRouterDom.Link, {
+      }, "Login")), _react.default.createElement(_reactRouterDom.Link, {
         to: "/register"
       }, _react.default.createElement(_Button.default, {
         variant: "link"
@@ -51954,7 +51954,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/register",
         render: function render() {
-          return _react.default.createElement(_registrationView.RegistrationView, null);
+          return _react.default.createElement(_registrationView.RegistrationView, {
+            onLoggedIn: function onLoggedIn(user) {
+              return _this3.onLoggedIn(user);
+            }
+          });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/movies/:movieId",
@@ -51995,7 +51999,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         render: function render(_ref3) {
           var match = _ref3.match;
           return _react.default.createElement(_genreView.GenreView, {
-            genre: movies.find(function (m) {
+            movie: movies.find(function (m) {
               return m.Genre.Name === match.params.name;
             }),
             movies: movies,
@@ -52235,7 +52239,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63392" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64423" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

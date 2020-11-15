@@ -118,7 +118,7 @@ export class MainView extends React.Component {
           {/* Nav start */}
           <Navbar sticky="top" expand="lg" className="mb-2 navbar-styles">
             <Navbar.Brand className="navbar-brand">
-              <Link to={`/`}>Victorville Film Archives</Link>
+              <Link to={`/`}>myFlix001</Link>
             </Navbar.Brand>
             <Navbar.Toggle
               aria-controls="basic-navbar-nav"
@@ -131,7 +131,7 @@ export class MainView extends React.Component {
               {!user ? (
                 <ul>
                   <Link to={`/`}>
-                    <Button variant="link">login</Button>
+                    <Button variant="link">Login</Button>
                   </Link>
                   <Link to={`/register`}>
                     <Button variant="link">Register</Button>
@@ -179,7 +179,14 @@ export class MainView extends React.Component {
               return <MoviesList movies={movies} />;
             }}
           /> */}
-          <Route path="/register" render={() => <RegistrationView />} />
+          <Route
+            path="/register"
+            render={() => (
+              <RegistrationView
+                onLoggedIn={(user) => this.onLoggedIn(user)}
+              />
+            )}
+          />
           <Route
             path="/movies/:movieId"
             render={({ match }) => (
@@ -204,7 +211,7 @@ export class MainView extends React.Component {
             path="/genres/:name"
             render={({ match }) => (
               <GenreView
-                genre={movies.find((m) => m.Genre.Name === match.params.name)}
+                movie={movies.find((m) => m.Genre.Name === match.params.name)}
                 movies={movies}
                 addToFavourites={() => addToFavourites(movie)}
               />

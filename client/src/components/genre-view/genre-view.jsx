@@ -12,14 +12,14 @@ export class GenreView extends Component {
   
     render() {
         const { movie, genre } = this.props
-        if (!genre) return null;
+        if (!movie) return null;
         return (
             <div>
                 <Container>
                     <Card>
                     <Card.Body>
-                        <Card.Title>{genre.Genre.Name}</Card.Title>
-                        <Card.Text>{genre.Genre.Description}</Card.Text>
+                        <Card.Title>{movie.Genre.Name}</Card.Title>
+                        <Card.Text>{movie.Genre.Description}</Card.Text>
                         <Link to={'/'}><button>Back</button></Link>
                     </Card.Body>
                     </Card>

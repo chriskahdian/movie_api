@@ -26,7 +26,7 @@ export class MovieView extends React.Component {
       })
       .then((response) => {
         console.log(response);
-        window.open("/client", "_self");
+        window.open("/", "_self");
       });
   }
 
@@ -64,7 +64,7 @@ export class MovieView extends React.Component {
           </Button>
         </div>
         <div>
-          <button onClick={clearState}>Back to Main</button>
+        <Link to={'/'}><button>Back</button></Link>
         </div>
       </div>
     );
