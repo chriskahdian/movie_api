@@ -36337,6 +36337,10 @@ exports.RegistrationView = RegistrationView;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -36374,10 +36378,81 @@ function RegistrationView(props) {
       birthday = _useState8[0],
       setBirthday = _useState8[1];
 
-  var handleSubmit = function handleSubmit() {
-    console.log(username, password, birthday, email);
-    props.onLoggedIn(username);
+  var user = {
+    username: username,
+    password: password,
+    email: email,
+    birthday: birthday
   };
+
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!username) {
+      alert('username is required');
+    }
+
+    if (username) {
+      if (username.length < 4) {
+        alert('username has to be longer than 4 characters');
+      }
+    }
+
+    if (!password) {
+      alert('password is required');
+    }
+
+    _axios.default.post('https://myflix001.herokuapp.com/users', {
+      username: username,
+      password: password,
+      email: email,
+      birthday: birthday
+    }).then(function (res) {
+      login(res.data);
+    }).catch(function (e) {
+      console.log(e, 'Error registering user');
+    });
+  };
+
+  var login = function login(data) {
+    _axios.default.post('https://myflix001.herokuapp.com/login', {
+      username: data.username,
+      password: user.password
+    }).then(function (res) {
+      var data = res.data;
+      props.onLoggedIn(data);
+      window.open('/client', '_self');
+    }).catch(function (e) {
+      console.log('No such user', e);
+    });
+  }; // const handleSubmit = (e) => {
+  //     e.preventDefault();
+  //     if (!username) {
+  //       alert('Username is required');
+  //     }
+  //     if (username) {
+  //       if (username.length < 4) {
+  //         alert('Username has to be longer than 4 characters');
+  //       }
+  //     }
+  //     if (!password) {
+  //       alert('Password is required');
+  //     }
+  //     axios
+  //         .post('https://myflix001.herokuapp.com/users', {
+  //             username,
+  //             password,
+  //             email,
+  //             birthday,
+  //         })
+  //         .then((res) => {
+  //             LoginView(res.data);
+  //         })
+  //         .catch((e) => {
+  //             console.log(e, 'Error registering user, please review requirements');
+  //         });
+  // };
+
 
   return _react.default.createElement("form", null, _react.default.createElement("label", null, "Username:", _react.default.createElement("input", {
     type: "text",
@@ -36408,7 +36483,7 @@ function RegistrationView(props) {
     onClick: handleSubmit
   }, "Register"));
 }
-},{"react":"../node_modules/react/index.js"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../../node_modules/axios/index.js"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52239,7 +52314,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64423" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58756" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
