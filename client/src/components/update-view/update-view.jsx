@@ -4,10 +4,8 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { setUsername } from "../../actions/actions";
-import { connect } from "react-redux";
 
-function UpdateView(props) {
+export function UpdateView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -16,7 +14,7 @@ function UpdateView(props) {
   const handleUpdate = (e) => {
     e.preventDefault();
     const url =
-      "https://groverohit-movie-api.herokuapp.com/users/" +
+      "https://myflix001.herokuapp.com/users/" +
       localStorage.getItem("user");
     axios
       .put(
@@ -33,11 +31,11 @@ function UpdateView(props) {
       )
       .then((response) => {
         const data = response.data;
-        // console.log(data);
+        console.log(data);
         localStorage.setItem("user", data.Username);
-        props.setUsername(data.Username);
+        // props.setUsername(data.Username);
         alert("Your profile data was updated successfully");
-        window.open("/client", "_self");
+        window.open("/", "_self");
       })
       .catch((e) => {
         console.log(e);
@@ -97,5 +95,3 @@ function UpdateView(props) {
     </Container>
   );
 }
-
-export default connect(null, { setUsername })(UpdateView);
