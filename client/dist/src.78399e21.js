@@ -39526,8 +39526,9 @@ function RegistrationView() {
       alert("User created successfully");
       window.open("/", "_self");
     }).catch(function (e) {
-      console.log(e.response);
-      alert("Error processing request");
+      console.log(e.response); // alert("Error processing request");
+
+      alert(e.response.data);
     });
   };
 
@@ -52363,7 +52364,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50794" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51412" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

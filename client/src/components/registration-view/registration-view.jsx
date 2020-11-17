@@ -152,7 +152,8 @@ export function RegistrationView() {
       })
       .catch((e) => {
         console.log(e.response);
-        alert("Error processing request");
+        // alert("Error processing request");
+        alert(e.response.data)
       });
   };
 
