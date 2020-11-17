@@ -64,7 +64,7 @@ export class ProfileView extends React.Component {
           dob: this.formatDate(response.data.Birthday),
           favoriteMovies: response.data.FavMovs,
         });
-        this.props.setUsername(response.data.Username);
+        this.props.setUsername(response.data.username);
       });
   }
 

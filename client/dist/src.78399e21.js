@@ -40179,7 +40179,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           favoriteMovies: response.data.FavMovs
         });
 
-        _this2.props.setUsername(response.data.Username);
+        _this2.props.setUsername(response.data.username);
       });
     } // handleSubmit(e) {
     //   e.preventDefault();
@@ -52314,7 +52314,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58756" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64663" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
