@@ -64,7 +64,7 @@ export class ProfileView extends React.Component {
           dob: this.formatDate(response.data.Birthday),
           favoriteMovies: response.data.FavMovs,
         });
-        this.props.setUsername(response.data.username);
+        // this.props.setUsername(response.data.Username);
       });
   }
 
@@ -122,7 +122,7 @@ export class ProfileView extends React.Component {
 
     localStorage.removeItem("token");
     // localStorage.removeItem("user");
-    window.open("/client", "_self");
+    window.open("/", "_self");
   }
 
   render() {
