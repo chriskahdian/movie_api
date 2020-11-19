@@ -39513,6 +39513,21 @@ function RegistrationView() {
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
+
+    if (!username) {
+      alert('username is required');
+    }
+
+    if (username) {
+      if (username.length < 4) {
+        alert('username has to be longer than 4 characters');
+      }
+    }
+
+    if (!password) {
+      alert('password is required');
+    }
+
     var createdUser = {
       Username: username,
       Password: password,
@@ -52364,7 +52379,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51412" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51057" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
