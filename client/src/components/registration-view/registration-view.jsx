@@ -41,7 +41,7 @@ export function RegistrationView() {
         console.log(response);
         console.log(response.data);
         alert("User created successfully");
-        window.open("/", "_self");
+        window.open("/client", "_self");
       })
       .catch((e) => {
         console.log(e.response);
