@@ -27,6 +27,21 @@ export function RegistrationView() {
         if (!password) {
           alert('password is required');
         }
+
+        // if (!email){
+        //   alert('email required')
+        // }
+
+
+        if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+          return null;
+        } else {
+          alert ('Please enter a valid email')
+        }
+        if (email.trim() === '') {
+          return 'Email is required';
+        }
+
         
     const createdUser = {
       Username: username,
@@ -103,3 +118,45 @@ export function RegistrationView() {
     </Form>
   );
 }
+
+
+
+
+
+
+
+
+
+
+// const nameValidation = (fieldName, fieldValue) => {
+//   if (fieldValue.trim() === '') {
+//     return `${fieldName} is required`;
+//   }
+//   if (/[^a-zA-Z -]/.test(fieldValue)) {
+//     return 'Invalid characters';
+//   }
+//   if (fieldValue.trim().length < 3) {
+//     return `${fieldName} needs to be at least three characters`;
+//   }
+//   return null;
+// };
+
+// const emailValidation = email => {
+//   if (
+//     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+//       email,
+//     )
+//   ) {
+//     return null;
+//   }
+//   if (email.trim() === '') {
+//     return 'Email is required';
+//   }
+//   return 'Please enter a valid email';
+// };
+
+// const validate = {
+//   firstName: name => nameValidation('First Name', name),
+//   email: emailValidation,
+//   age: ageValidation,
+// };
