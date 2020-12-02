@@ -41890,20 +41890,19 @@ function RegistrationView() {
 
     if (!password) {
       alert('password is required');
-    } // if (!email){
-    //   alert('email required')
+    }
+
+    if (!email) {
+      alert('email required');
+    } // if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+    //   return null;
+    // } else {
+    //   alert ('Please enter a valid email')
+    // }
+    // if (email.trim() === '') {
+    //   return 'Email is required';
     // }
 
-
-    if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-      return null;
-    } else {
-      alert('Please enter a valid email');
-    }
-
-    if (email.trim() === '') {
-      return 'Email is required';
-    }
 
     var createdUser = {
       Username: username,
@@ -54943,7 +54942,7 @@ var MyFlixApplication = /*#__PURE__*/function (_React$Component) {
 var container = document.getElementsByClassName('app-container')[0]; //Tell React to render app in root DOM element
 
 _reactDom.default.render(_react.default.createElement(MyFlixApplication), container);
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../../../home/chriskahdian/.npm/_npx/142/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../../../home/chriskahdian/.npm/_npx/464/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -54971,7 +54970,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50822" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54208" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -55147,5 +55146,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../../../home/chriskahdian/.npm/_npx/142/lib/node_modules/parcel/src/builtins/hmr-runtime.js","index.jsx"], null)
+},{}]},{},["../../../../../../../../home/chriskahdian/.npm/_npx/464/lib/node_modules/parcel/src/builtins/hmr-runtime.js","index.jsx"], null)
 //# sourceMappingURL=/src.78399e21.js.map
