@@ -141,7 +141,7 @@ export function RegistrationView() {
 
 
         // if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-        //   return null;
+        //   return '';
         // } else {
         //   alert ('Please enter a valid email')
         // }

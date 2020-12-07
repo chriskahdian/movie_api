@@ -4,18 +4,23 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import formValidation from "../shared-functions/form-validation"
 export function UpdateView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [usernameErr, setUsernameErr] = useState({});
+  const [passwordErr, setPasswordErr] = useState({});
+  const [emailErr, setEmailErr] = useState({});
 
   const handleUpdate = (e) => {
     e.preventDefault();
+    const isValid = formValidation;
     const url =
       "https://myflix001.herokuapp.com/users/" +
       localStorage.getItem("user");
+    if (isValid) {
     axios
       .put(
         url,
@@ -40,7 +45,35 @@ export function UpdateView(props) {
       .catch((e) => {
         console.log(e);
       });
+    }
   };
+
+  // const formValidation = () => {
+  //   const usernameErr = {};
+  //   const passwordErr = {};
+  //   const emailErr = {};
+  //   let isValid = true;
+
+  //   if (username.trim().length < 5) {
+  //     usernameErr.usernameShort = "Username must be at least 5 characters";
+  //     isValid = false;
+  //   }
+
+  //   if (password.trim().length < 1) {
+  //     passwordErr.passwordMissing = "You must enter a password";
+  //     isValid = false;
+  //   }
+
+  //   if (!email.includes(".") && !email.includes("@")) {
+  //     emailErr.emailNotEmail = "A valid email address is required";
+  //     isValid = false;
+  //   }
+
+  //   setUsernameErr(usernameErr);
+  //   setPasswordErr(passwordErr);
+  //   setEmailErr(emailErr);
+  //   return isValid;
+  // };
 
   return (
     <Container>
@@ -52,8 +85,16 @@ export function UpdateView(props) {
             type="text"
             value={username}
             placeholder="Enter username"
+            required
             onChange={(e) => setUsername(e.target.value)}
           />
+        {Object.keys(usernameErr).map((key) => {
+            return (
+              <div key={key} style={{ color: "red" }}>
+                {usernameErr[key]}
+              </div>
+            );
+          })}
         </Form.Group>
         <Form.Group>
           <Form.Label>Password:</Form.Label>
@@ -61,8 +102,16 @@ export function UpdateView(props) {
             type="password"
             value={password}
             placeholder="Enter password"
+            required
             onChange={(e) => setPassword(e.target.value)}
           />
+        {Object.keys(passwordErr).map((key) => {
+            return (
+              <div key={key} style={{ color: "red" }}>
+                {passwordErr[key]}
+              </div>
+            );
+          })}  
         </Form.Group>
         <Form.Group>
           <Form.Label>Birth Date:</Form.Label>
@@ -78,9 +127,16 @@ export function UpdateView(props) {
           <Form.Control
             type="email"
             placeholder="name@example.com"
-            value={email}
+            required
             onChange={(e) => setEmail(e.target.value)}
           />
+        {Object.keys(emailErr).map((key) => {
+            return (
+              <div key={key} style={{ color: "red" }}>
+                {emailErr[key]}
+              </div>
+            );
+          })}
         </Form.Group>
         <Link to={`/users/`}>
           <Button
