@@ -16,7 +16,7 @@ export function UpdateView(props) {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    const isValid = formValidation;
+    const isValid = formValidation();
     const url =
       "https://myflix001.herokuapp.com/users/" +
       localStorage.getItem("user");
@@ -43,7 +43,7 @@ export function UpdateView(props) {
         window.open("/", "_self");
       })
       .catch((e) => {
-        console.log(e);
+        console.log(e.response.data.errors[0].msg);
       });
     }
   };
@@ -56,6 +56,12 @@ export function UpdateView(props) {
 
     if (username.trim().length < 5) {
       usernameErr.usernameShort = "Username must be at least 5 characters";
+      isValid = false;
+    }
+
+    if (/[^0-9a-zA-Z]/.test(username)) {
+      // It has an invalid character
+      usernameErr.username = "Username cannot contain symbols";
       isValid = false;
     }
 

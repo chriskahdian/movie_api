@@ -42604,7 +42604,7 @@ function UpdateView(props) {
 
   var handleUpdate = function handleUpdate(e) {
     e.preventDefault();
-    var isValid = formValidation;
+    var isValid = formValidation();
     var url = "https://myflix001.herokuapp.com/users/" + localStorage.getItem("user");
 
     if (isValid) {
@@ -42625,7 +42625,7 @@ function UpdateView(props) {
         alert("Your profile data was updated successfully");
         window.open("/", "_self");
       }).catch(function (e) {
-        console.log(e);
+        console.log(e.response.data.errors[0].msg);
       });
     }
   };
@@ -42638,6 +42638,12 @@ function UpdateView(props) {
 
     if (username.trim().length < 5) {
       usernameErr.usernameShort = "Username must be at least 5 characters";
+      isValid = false;
+    }
+
+    if (/[^0-9a-zA-Z]/.test(username)) {
+      // It has an invalid character
+      usernameErr.username = "Username cannot contain symbols";
       isValid = false;
     }
 
@@ -54616,7 +54622,7 @@ var MyFlixApplication = /*#__PURE__*/function (_React$Component) {
 var container = document.getElementsByClassName('app-container')[0]; //Tell React to render app in root DOM element
 
 _reactDom.default.render(_react.default.createElement(MyFlixApplication), container);
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../../../home/chriskahdian/.npm/_npx/726/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../../../home/chriskahdian/.npm/_npx/1154/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -54644,7 +54650,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51102" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51465" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -54820,5 +54826,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../../../home/chriskahdian/.npm/_npx/726/lib/node_modules/parcel/src/builtins/hmr-runtime.js","index.jsx"], null)
+},{}]},{},["../../../../../../../../home/chriskahdian/.npm/_npx/1154/lib/node_modules/parcel/src/builtins/hmr-runtime.js","index.jsx"], null)
 //# sourceMappingURL=/src.78399e21.js.map
