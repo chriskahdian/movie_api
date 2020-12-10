@@ -42516,59 +42516,17 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 
 exports.ProfileView = ProfileView;
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../../node_modules/axios/index.js"}],"components/shared-functions/form-validation.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 // import React from 'react'
-// 
-// const form-validation = () => {
+// import { View, Text } from 'react-native'
+// export default function formValidation(props) {
+//     const { username, password, email, birthday }
 //     return (
 //         <View>
 //             <Text></Text>
 //         </View>
 //     )
 // }
-var formValidation = function formValidation() {
-  var usernameErr = {};
-  var passwordErr = {};
-  var emailErr = {};
-  var isValid = true;
-
-  if (username.trim().length < 5) {
-    usernameErr.usernameShort = "Username must be at least 5 characters";
-    isValid = false;
-  }
-
-  if (password.trim().length < 1) {
-    passwordErr.passwordMissing = "You must enter a password";
-    isValid = false;
-  }
-
-  if (!email.includes(".") && !email.includes("@")) {
-    emailErr.emailNotEmail = "A valid email address is required";
-    isValid = false;
-  }
-
-  setUsernameErr(usernameErr);
-  setPasswordErr(passwordErr);
-  setEmailErr(emailErr);
-  return isValid;
-};
-
-var _default = formValidation; // const styles = StyleSheet.create({})
-
-exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"components/update-view/update-view.jsx":[function(require,module,exports) {
+},{}],"components/update-view/update-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42646,7 +42604,7 @@ function UpdateView(props) {
 
   var handleUpdate = function handleUpdate(e) {
     e.preventDefault();
-    var isValid = (0, _formValidation.default)();
+    var isValid = formValidation;
     var url = "https://myflix001.herokuapp.com/users/" + localStorage.getItem("user");
 
     if (isValid) {
@@ -42670,29 +42628,34 @@ function UpdateView(props) {
         console.log(e);
       });
     }
-  }; // const formValidation = () => {
-  //   const usernameErr = {};
-  //   const passwordErr = {};
-  //   const emailErr = {};
-  //   let isValid = true;
-  //   if (username.trim().length < 5) {
-  //     usernameErr.usernameShort = "Username must be at least 5 characters";
-  //     isValid = false;
-  //   }
-  //   if (password.trim().length < 1) {
-  //     passwordErr.passwordMissing = "You must enter a password";
-  //     isValid = false;
-  //   }
-  //   if (!email.includes(".") && !email.includes("@")) {
-  //     emailErr.emailNotEmail = "A valid email address is required";
-  //     isValid = false;
-  //   }
-  //   setUsernameErr(usernameErr);
-  //   setPasswordErr(passwordErr);
-  //   setEmailErr(emailErr);
-  //   return isValid;
-  // };
+  };
 
+  var formValidation = function formValidation() {
+    var usernameErr = {};
+    var passwordErr = {};
+    var emailErr = {};
+    var isValid = true;
+
+    if (username.trim().length < 5) {
+      usernameErr.usernameShort = "Username must be at least 5 characters";
+      isValid = false;
+    }
+
+    if (password.trim().length < 1) {
+      passwordErr.passwordMissing = "You must enter a password";
+      isValid = false;
+    }
+
+    if (!email.includes(".") && !email.includes("@")) {
+      emailErr.emailNotEmail = "A valid email address is required";
+      isValid = false;
+    }
+
+    setUsernameErr(usernameErr);
+    setPasswordErr(passwordErr);
+    setEmailErr(emailErr);
+    return isValid;
+  };
 
   return _react.default.createElement(_Container.default, null, _react.default.createElement("h1", null, "Update your account"), _react.default.createElement(_Form.default, {
     className: "registration-form"
@@ -54653,7 +54616,7 @@ var MyFlixApplication = /*#__PURE__*/function (_React$Component) {
 var container = document.getElementsByClassName('app-container')[0]; //Tell React to render app in root DOM element
 
 _reactDom.default.render(_react.default.createElement(MyFlixApplication), container);
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../../../home/chriskahdian/.npm/_npx/737/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../../../home/chriskahdian/.npm/_npx/726/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -54681,7 +54644,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61529" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51102" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -54857,5 +54820,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../../../home/chriskahdian/.npm/_npx/737/lib/node_modules/parcel/src/builtins/hmr-runtime.js","index.jsx"], null)
+},{}]},{},["../../../../../../../../home/chriskahdian/.npm/_npx/726/lib/node_modules/parcel/src/builtins/hmr-runtime.js","index.jsx"], null)
 //# sourceMappingURL=/src.78399e21.js.map

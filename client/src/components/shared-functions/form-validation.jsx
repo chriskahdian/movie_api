@@ -1,10 +1,11 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+// import React from 'react'
+// import { View, Text } from 'react-native'
 
-export default function formValidation() {
-    return (
-        <View>
-            <Text></Text>
-        </View>
-    )
-}
+// export default function formValidation(props) {
+//     const { username, password, email, birthday }
+//     return (
+//         <View>
+//             <Text></Text>
+//         </View>
+//     )
+// }
