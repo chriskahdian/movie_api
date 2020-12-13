@@ -41468,26 +41468,71 @@ function RegistrationView() {
       dob = _useState8[0],
       setDob = _useState8[1];
 
+  var _useState9 = (0, _react.useState)({}),
+      _useState10 = _slicedToArray(_useState9, 2),
+      usernameErr = _useState10[0],
+      setUsernameErr = _useState10[1];
+
+  var _useState11 = (0, _react.useState)({}),
+      _useState12 = _slicedToArray(_useState11, 2),
+      passwordErr = _useState12[0],
+      setPasswordErr = _useState12[1];
+
+  var _useState13 = (0, _react.useState)({}),
+      _useState14 = _slicedToArray(_useState13, 2),
+      emailErr = _useState14[0],
+      setEmailErr = _useState14[1];
+
+  var formValidation = function formValidation() {
+    var usernameErr = {};
+    var passwordErr = {};
+    var emailErr = {};
+    var isValid = true;
+
+    if (username.trim().length < 5) {
+      usernameErr.usernameShort = "Username must be at least 5 characters";
+      isValid = false;
+    }
+
+    if (/[^0-9a-zA-Z]/.test(username)) {
+      // It has an invalid character
+      usernameErr.username = "Username cannot contain symbols";
+      isValid = false;
+    }
+
+    if (password.trim().length < 1) {
+      passwordErr.passwordMissing = "You must enter a password";
+      isValid = false;
+    }
+
+    if (!email.includes(".") && !email.includes("@")) {
+      emailErr.emailNotEmail = "A valid email address is required";
+      isValid = false;
+    }
+
+    setUsernameErr(usernameErr);
+    setPasswordErr(passwordErr);
+    setEmailErr(emailErr);
+    return isValid;
+  };
+
   var handleSubmit = function handleSubmit(e) {
-    e.preventDefault();
-
-    if (!username) {
-      alert('username is required');
-    }
-
-    if (username) {
-      if (username.length < 4) {
-        alert('username has to be longer than 4 characters');
-      }
-    }
-
-    if (!password) {
-      alert('password is required');
-    }
-
-    if (!email) {
-      alert('email required');
-    } // if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+    var isValid = formValidation();
+    e.preventDefault(); // if (!username) {
+    //   alert('username is required');
+    // }
+    // if (username) {
+    //   if (username.length < 4) {
+    //     alert('username has to be longer than 4 characters');
+    //   }
+    // }
+    // if (!password) {
+    //   alert('password is required');
+    // }
+    // if (!email){
+    //   alert('email required')
+    // }
+    // if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
     //   return '';
     // } else {
     //   alert ('Please enter a valid email')
@@ -41496,7 +41541,6 @@ function RegistrationView() {
     //   return 'Email is required';
     // }
 
-
     var createdUser = {
       Username: username,
       Password: password,
@@ -41504,51 +41548,69 @@ function RegistrationView() {
       Birthday: dob
     };
 
-    _axios.default.post("https://myflix001.herokuapp.com/users", createdUser).then(function (response) {
-      console.log(response);
-      console.log(response.data);
-      alert("User created successfully");
-      window.open("/client", "_self");
-    }).catch(function (e) {
-      console.log(e.response); // alert("Error processing request");
+    if (isValid) {
+      _axios.default.post("https://myflix001.herokuapp.com/users", createdUser).then(function (response) {
+        console.log(response);
+        console.log(response.data);
+        alert("User created successfully");
+        window.open("/client", "_self");
+      }).catch(function (e) {
+        console.log(e.response); // alert("Error processing request");
+        // alert(e.response.data)
 
-      alert(e.response.data);
-    });
+        console.log(e.response.data.errors[0].msg);
+      });
+    }
   };
 
   return _react.default.createElement(_Form.default, {
-    style: {
-      width: "32rem",
-      margin: "auto",
-      textAlign: "center"
-    }
+    className: "registration-form"
   }, _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicUsername"
-  }, _react.default.createElement(_Form.default.Label, null, "Username"), _react.default.createElement(_Form.default.Control, {
+  }, _react.default.createElement(_Form.default.Label, null, "Username:"), _react.default.createElement(_Form.default.Control, {
     type: "text",
-    placeholder: "Enter username",
     value: username,
+    placeholder: "Enter username",
+    required: true,
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     }
-  })), _react.default.createElement(_Form.default.Group, {
-    controlId: "formBasicPassword"
-  }, _react.default.createElement(_Form.default.Label, null, "Password"), _react.default.createElement(_Form.default.Control, {
+  }), Object.keys(usernameErr).map(function (key) {
+    return _react.default.createElement("div", {
+      key: key,
+      style: {
+        color: "red"
+      }
+    }, usernameErr[key]);
+  })), _react.default.createElement(_Form.default.Group, null, _react.default.createElement(_Form.default.Label, null, "Password:"), _react.default.createElement(_Form.default.Control, {
     type: "password",
-    placeholder: "Password",
     value: password,
+    placeholder: "Enter password",
+    required: true,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     }
-  })), _react.default.createElement(_Form.default.Group, {
-    controlId: "formBasicEmail"
-  }, _react.default.createElement(_Form.default.Label, null, "Email address"), _react.default.createElement(_Form.default.Control, {
+  }), Object.keys(passwordErr).map(function (key) {
+    return _react.default.createElement("div", {
+      key: key,
+      style: {
+        color: "red"
+      }
+    }, passwordErr[key]);
+  })), _react.default.createElement(_Form.default.Group, null, _react.default.createElement(_Form.default.Label, null, "Email:"), _react.default.createElement(_Form.default.Control, {
     type: "email",
-    value: email,
-    placeholder: "Enter email",
+    placeholder: "name@example.com",
+    required: true,
     onChange: function onChange(e) {
       return setEmail(e.target.value);
     }
+  }), Object.keys(emailErr).map(function (key) {
+    return _react.default.createElement("div", {
+      key: key,
+      style: {
+        color: "red"
+      }
+    }, emailErr[key]);
   })), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicDate"
   }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
@@ -42516,17 +42578,81 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 
 exports.ProfileView = ProfileView;
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../../node_modules/axios/index.js"}],"components/shared-functions/form-validation.jsx":[function(require,module,exports) {
-// import React from 'react'
-// import { View, Text } from 'react-native'
-// export default function formValidation(props) {
-//     const { username, password, email, birthday }
-//     return (
-//         <View>
-//             <Text></Text>
-//         </View>
-//     )
-// }
-},{}],"components/update-view/update-view.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formValidation;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function formValidation(props) {
+  var _useState = useState({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      usernameErr = _useState2[0],
+      setUsernameErr = _useState2[1];
+
+  var _useState3 = useState({}),
+      _useState4 = _slicedToArray(_useState3, 2),
+      passwordErr = _useState4[0],
+      setPasswordErr = _useState4[1];
+
+  var _useState5 = useState({}),
+      _useState6 = _slicedToArray(_useState5, 2),
+      emailErr = _useState6[0],
+      setEmailErr = _useState6[1];
+
+  var formValidation = function formValidation() {
+    var usernameErr = {};
+    var passwordErr = {};
+    var emailErr = {};
+    var isValid = true;
+
+    if (username.trim().length < 5) {
+      usernameErr.usernameShort = "Username must be at least 5 characters";
+      isValid = false;
+    }
+
+    if (/[^0-9a-zA-Z]/.test(username)) {
+      // It has an invalid character
+      usernameErr.username = "Username cannot contain symbols";
+      isValid = false;
+    }
+
+    if (password.trim().length < 1) {
+      passwordErr.passwordMissing = "You must enter a password";
+      isValid = false;
+    }
+
+    if (!email.includes(".") && !email.includes("@")) {
+      emailErr.emailNotEmail = "A valid email address is required";
+      isValid = false;
+    }
+
+    setUsernameErr(usernameErr);
+    setPasswordErr(passwordErr);
+    setEmailErr(emailErr);
+    return isValid;
+  };
+
+  return _react.default.createElement(View, null, _react.default.createElement(Text, null));
+}
+},{"react":"../node_modules/react/index.js"}],"components/update-view/update-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54622,7 +54748,7 @@ var MyFlixApplication = /*#__PURE__*/function (_React$Component) {
 var container = document.getElementsByClassName('app-container')[0]; //Tell React to render app in root DOM element
 
 _reactDom.default.render(_react.default.createElement(MyFlixApplication), container);
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../../../home/chriskahdian/.npm/_npx/1154/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../../../home/chriskahdian/.npm/_npx/455/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -54650,7 +54776,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51465" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54311" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -54826,5 +54952,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../../../home/chriskahdian/.npm/_npx/1154/lib/node_modules/parcel/src/builtins/hmr-runtime.js","index.jsx"], null)
+},{}]},{},["../../../../../../../../home/chriskahdian/.npm/_npx/455/lib/node_modules/parcel/src/builtins/hmr-runtime.js","index.jsx"], null)
 //# sourceMappingURL=/src.78399e21.js.map

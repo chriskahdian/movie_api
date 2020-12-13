@@ -121,33 +121,71 @@ export function RegistrationView() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [dob, setDob] = useState("");
+  const [usernameErr, setUsernameErr] = useState({});
+  const [passwordErr, setPasswordErr] = useState({});
+  const [emailErr, setEmailErr] = useState({});
+  const formValidation = () => {
+    const usernameErr = {};
+    const passwordErr = {};
+    const emailErr = {};
+    let isValid = true;
+
+    if (username.trim().length < 5) {
+      usernameErr.usernameShort = "Username must be at least 5 characters";
+      isValid = false;
+    }
+
+    if (/[^0-9a-zA-Z]/.test(username)) {
+      // It has an invalid character
+      usernameErr.username = "Username cannot contain symbols";
+      isValid = false;
+    }
+
+    if (password.trim().length < 1) {
+      passwordErr.passwordMissing = "You must enter a password";
+      isValid = false;
+    }
+
+    if (!email.includes(".") && !email.includes("@")) {
+      emailErr.emailNotEmail = "A valid email address is required";
+      isValid = false;
+    }
+
+    setUsernameErr(usernameErr);
+    setPasswordErr(passwordErr);
+    setEmailErr(emailErr);
+    return isValid;
+  };
+
 
   const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!username) {
-          alert('username is required');
-        }
-        if (username) {
-          if (username.length < 4) {
-            alert('username has to be longer than 4 characters');
-          }
-        }
-        if (!password) {
-          alert('password is required');
-        }
-        if (!email){
-          alert('email required')
-        }
+        
+      const isValid = formValidation();
+      e.preventDefault();
+      // if (!username) {
+      //   alert('username is required');
+      // }
+      // if (username) {
+      //   if (username.length < 4) {
+      //     alert('username has to be longer than 4 characters');
+      //   }
+      // }
+      // if (!password) {
+      //   alert('password is required');
+      // }
+      // if (!email){
+      //   alert('email required')
+      // }
 
 
-        // if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-        //   return '';
-        // } else {
-        //   alert ('Please enter a valid email')
-        // }
-        // if (email.trim() === '') {
-        //   return 'Email is required';
-        // }
+      // if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+      //   return '';
+      // } else {
+      //   alert ('Please enter a valid email')
+      // }
+      // if (email.trim() === '') {
+      //   return 'Email is required';
+      // }
 
         
     const createdUser = {
@@ -156,7 +194,7 @@ export function RegistrationView() {
       Email: email,
       Birthday: dob,
     };
-
+    if (isValid) {
     axios
       .post("https://myflix001.herokuapp.com/users", createdUser)
       .then((response) => {
@@ -168,12 +206,32 @@ export function RegistrationView() {
       .catch((e) => {
         console.log(e.response);
         // alert("Error processing request");
-        alert(e.response.data)
+        // alert(e.response.data)
+        console.log(e.response.data.errors[0].msg);
       });
+    }
   };
 
   return (
-    <Form style={{ width: "32rem", margin: "auto", textAlign: "center" }}>
+    <Form className="registration-form">
+        <Form.Group controlId="formBasicUsername">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
+            type="text"
+            value={username}
+            placeholder="Enter username"
+            required
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        {Object.keys(usernameErr).map((key) => {
+            return (
+              <div key={key} style={{ color: "red" }}>
+                {usernameErr[key]}
+              </div>
+            );
+          })}
+        </Form.Group>
+    {/* <Form style={{ width: "32rem", margin: "auto", textAlign: "center" }}>
       <Form.Group controlId="formBasicUsername">
         <Form.Label>Username</Form.Label>
         <Form.Control
@@ -182,8 +240,27 @@ export function RegistrationView() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-      </Form.Group>
+      </Form.Group> */}
 
+
+        <Form.Group>
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            placeholder="Enter password"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        {Object.keys(passwordErr).map((key) => {
+            return (
+              <div key={key} style={{ color: "red" }}>
+                {passwordErr[key]}
+              </div>
+            );
+          })}  
+        </Form.Group>
+{/* 
       <Form.Group controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control
@@ -192,9 +269,27 @@ export function RegistrationView() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-      </Form.Group>
+      </Form.Group> */}
 
-      <Form.Group controlId="formBasicEmail">
+
+        <Form.Group>
+          <Form.Label>Email:</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="name@example.com"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        {Object.keys(emailErr).map((key) => {
+            return (
+              <div key={key} style={{ color: "red" }}>
+                {emailErr[key]}
+              </div>
+            );
+          })}
+        </Form.Group>
+
+      {/* <Form.Group controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control
           type="email"
@@ -202,7 +297,7 @@ export function RegistrationView() {
           placeholder="Enter email"
           onChange={(e) => setEmail(e.target.value)}
         />
-      </Form.Group>
+      </Form.Group> */}
 
       <Form.Group controlId="formBasicDate">
         <Form.Label>Date of Birth</Form.Label>
