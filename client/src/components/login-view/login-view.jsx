@@ -1,12 +1,8 @@
-//using useState
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-
-
-//_
-//3.5 VERSION
+import './login-view.scss'
 
 export function LoginView(props) {
     const [ username, setUsername ] = useState('');
@@ -29,7 +25,14 @@ export function LoginView(props) {
     };
 
     return (
-        <Form>
+        
+        <Form className="login-form">
+            <Form.Group controlId="pageTop">
+                <Form.Label className="page-top">
+                    <h1>Login</h1>
+                    Hello, please log in or register
+                </Form.Label>
+            </Form.Group>
             <Form.Group controlId="formBasicUsername">
                 <Form.Label>Username:</Form.Label>
                 <Form.Control
@@ -48,48 +51,15 @@ export function LoginView(props) {
                     onChange={e => setPassword(e.target.value)}
                 />
             </Form.Group>
-            <Button
-                variant="primary"
-                type="submit"
-                onClick={handleSubmit}
-            >
-                Submit
-            </Button>
+            <Form.Group controlId="submitButton">
+                <Button
+                    variant="primary"
+                    type="submit"
+                    onClick={handleSubmit}
+                >
+                    Submit
+                </Button>
+            </Form.Group>
         </Form>
     );
 }
-
-
-
-
-
-
-
-//_
-//3.4 VERSION
-
-// export function LoginView(props) {
-//     const [ username, setUsername ] = useState('');
-//     const [ password, setPassword ] = useState('');
-
-//     const handleSubmit = (e) => {
-//         e.preventDefault();
-//         console.log(username, password);
-//         //send request to server for auth, then call props.onLoggedIn(username) below
-//         props.onLoggedIn(username);
-//     };
-
-//     return (
-//         <form>
-//             <label>
-//                 Username:
-//                 <input type="text" value={username} onChange = {e => setUsername(e.target.value)} />
-//             </label>
-//             <label>
-//                 Password:
-//                 <input type="password" value={password} onChange= {e => setPassword (e.target.value)} />
-//             </label>
-//             <button type="button" onClick={handleSubmit}>Submit</button>
-//         </form>
-//     );
-// }

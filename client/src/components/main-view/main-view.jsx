@@ -5,11 +5,8 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
-
-
 import { LoginView } from "../login-view/login-view";
 import { RegistrationView } from "../registration-view/registration-view";
-import { MovieCard } from "../movie-card/movie-card";
 import MoviesList from "../movies-list/movies-list";
 import { MovieView } from "../movie-view/movie-view";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -22,7 +19,7 @@ import { DirectorView } from "../director-view/director-view";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { setMovies, setUsername } from '../../actions/actions';
-
+import './main-view.scss'
 
 class MainView extends React.Component {
   constructor() {
@@ -43,20 +40,6 @@ class MainView extends React.Component {
       this.getMovies(accessToken);
     }
   }
-
-  // componentDidMount() {
-  //   axios
-  //     .get("https://myflix001.herokuapp.com/movies")
-  //     .then((response) => {
-  //       //assign the result to the state
-  //       this.setState({
-  //         movies: response.data,
-  //       });
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }
 
   onMovieClick(movie) {
     this.setState({
@@ -87,11 +70,7 @@ class MainView extends React.Component {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        // Assign the result to the state
         this.props.setMovies(response.data);
-        // this.setState({
-        //   movies: response.data,
-        // });
       })
       .catch(function (error) {
         console.log(error);
@@ -106,15 +85,9 @@ class MainView extends React.Component {
       user: null,
     });
   }
-
-  // onLoggedIn(user) {
-  //   this.setState({
-  //     user,
-  //   });
-  // }
-
+  
   render() {
-    // const { movies, user } = this.state;
+
     let { movies } = this.props;
     let { user } = this.state;
 
@@ -123,46 +96,39 @@ class MainView extends React.Component {
     return (
       <Router basename="/client">
         <Container className="main-view" fluid="true">
-          {/* Nav start */}
-          <Navbar sticky="top" expand="lg" className="mb-2 navbar-styles">
+
+          <Navbar sticky="top" expand="sm" className="navbar">
             <Navbar.Brand className="navbar-brand">
-              <Link to={`/`}>myFlix001</Link>
+              <Link to={`/`}><h1>myFlix001</h1></Link>
             </Navbar.Brand>
-            <Navbar.Toggle
-              aria-controls="basic-navbar-nav"
-              className="bg-light"
-            />
-            <Navbar.Collapse
-              className="justify-content-end navbar-light"
-              id="basic-navbar-nav"
-            >
+            <Navbar.Toggle aria-controls="basic-navbar-nav" className="bg-light"/>
+            <Navbar.Collapse className="justify-content-end navbar-light" id="basic-navbar-nav">
               {!user ? (
-                <ul>
+                <div>
                   <Link to={`/`}>
                     <Button variant="link">Login</Button>
                   </Link>
                   <Link to={`/register`}>
                     <Button variant="link">Register</Button>
                   </Link>
-                </ul>
+                </div>
               ) : (
-                <ul>
+                <div className="navButtons">
                   <Link to={`/`}>
-                    <Button variant="link" onClick={() => this.logOut()}>
-                      Log out
-                    </Button>
+                    <Button variant="link">Movies</Button>
                   </Link>
                   <Link to={`/users/`}>
                     <Button variant="link">Account</Button>
                   </Link>
                   <Link to={`/`}>
-                    <Button variant="link">Movies</Button>
+                    <Button variant="link" onClick={() => this.logOut()}>
+                      Log out
+                    </Button>
                   </Link>
-                </ul>
+                </div>
               )}
             </Navbar.Collapse>
           </Navbar>
-          {/* Nav end */}
 
           <Route
             exact
@@ -172,22 +138,14 @@ class MainView extends React.Component {
                 return (
                   <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                 );
-                return <MoviesList movies={movies}/>;
-              // return movies.map((m) => <MovieCard key={m._id} movie={m} />);
+                // return <MoviesList movies={movies}/>
+                return (
+                  <Container className="movies-list">
+                    <MoviesList movies={movies}/>
+                  </Container>
+                )
             }}
           />
-
-          {/* <Route
-            exact
-            path="/"
-            render={() => {
-              if (!user)
-                return (
-                  <LoginView logInFunc={(user) => this.onLoggedIn(user)} />
-                );
-              return <MoviesList movies={movies} />;
-            }}
-          /> */}
           <Route
             path="/register"
             render={() => (
@@ -208,9 +166,7 @@ class MainView extends React.Component {
             path="/directors/:name"
             render={({ match }) => (
               <DirectorView
-                director={movies.find(
-                  (m) => m.Director.Name === match.params.name
-                )}
+                director={movies.find((m) => m.Director.Name === match.params.name)}
                 movies={movies}
                 addToFavourites={() => addToFavourites(movie)}
               />
@@ -220,7 +176,7 @@ class MainView extends React.Component {
             path="/genres/:name"
             render={({ match }) => (
               <GenreView
-                movie={movies.find((m) => m.Genre.Name === match.params.name)}
+                genre={movies.find((m) => m.Genre.Name === match.params.name)}
                 movies={movies}
                 addToFavourites={() => addToFavourites(movie)}
               />

@@ -3,11 +3,35 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import './movie-view.scss'
 
 export class MovieView extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      favoriteMovies: [],
+    };
+  }
+
+  componentDidMount() {
+    let accessToken = localStorage.getItem("token");
+    this.getUser(accessToken);
+  }
+
+  getUser(token) {
+    let url =
+      "https://myflix001.herokuapp.com/users/" +
+      localStorage.getItem("user");
+    axios
+      .get(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          favoriteMovies: response.data.FavMovs,
+        });
+      });
   }
 
   addFavorite(movie) {
@@ -17,56 +41,229 @@ export class MovieView extends React.Component {
       localStorage.getItem("user") +
       "/Movies/" +
       movie._id;
-
     console.log(token);
-
     axios
       .post(url, "", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         console.log(response);
-        window.open("/", "_self");
+        window.open("/movies/" + movie._id, "_self");
+      });
+  }
+
+  removeFavorite(movie) {
+    let token = localStorage.getItem("token");
+    let url =
+      "https://myflix001.herokuapp.com/users/" +
+      localStorage.getItem("user") +
+      "/Movies/" +
+      movie._id;
+    axios
+      .delete(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+        window.open("/movies/" + movie._id, "_self");
       });
   }
 
   render() {
-    // const {movie} = this.props;
     const { movie, clearState } = this.props;
-    if (!movie) null;
+    const { favoriteMovies } = this.state
+    let addOrRem;
+    if (!movie) return null;
+    if (favoriteMovies.includes(movie._id)) {
+      addOrRem = 
+        <Link onClick={() => this.removeFavorite(movie)}>
+          Remove Favorite
+        </Link>
+    } else { 
+      addOrRem = 
+        <Link onClick={() => this.addFavorite(movie)}>
+          Add Favorite
+        </Link>
+    }
     return (
       <div className="movie-view">
-        <img className="movie-poster" src={movie.ImageURL} />
         <div className="movie-title">
-          <span className="label">Title: {movie.Title}</span>
+            <h1>{movie.Title}</h1>
         </div>
-        <div className="movie-genre">
-          <span className="label">Genre: </span>
-          <span className="value">{movie.Genre.Name}</span>
-          <Link to={`/genres/${movie.Genre.Name}`}>
-            <Button variant="link">Genre</Button>
-          </Link>
-        </div>
-        <div className="movie-director">
-          <span className="label">Director: </span>
-          <span className="value">{movie.Director.Name}</span>
-          <Link to={`/directors/${movie.Director.Name}`}>
-            <Button variant="link">Director</Button>
-          </Link>
-        </div>
+        <hr/>
         <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
+          {movie.Description}
         </div>
         <div>
-          <Button variant="link" onClick={() => this.addFavorite(movie)}>
-            Add Favorite
-          </Button>
+          <span>
+            <Link to={`/genres/${movie.Genre.Name}`}>
+              {movie.Genre.Name}
+            </Link>
+          </span>
+          <span>{" "+"|"+" "}</span>
+          <span>
+            <Link to={`/directors/${movie.Director.Name}`}>
+              {movie.Director.Name}
+            </Link>
+          </span>
+          <span>{" "+"|"+" "}</span>
+          <span>{addOrRem}</span>
+          <span>{" "+"|"+" "}</span>
+          <span><Link to={'/'}>All Movies</Link></span>
         </div>
-        <div>
-        <Link to={'/'}><button>Back</button></Link>
+        <hr/>
+        <div className="movie-poster">
+          <img src={movie.ImageURL} />
         </div>
       </div>
+
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from "react";
+// import Button from "react-bootstrap/Button";
+// import Card from "react-bootstrap/Card";
+// import { Link } from "react-router-dom";
+// import axios from "axios";
+// import './movie-view.scss'
+
+// export class MovieView extends React.Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       favoriteMovies: [],
+//     };
+//   }
+
+//   componentDidMount() {
+//     let accessToken = localStorage.getItem("token");
+//     this.getUser(accessToken);
+//   }
+
+//   getUser(token) {
+//     let url =
+//       "https://myflix001.herokuapp.com/users/" +
+//       localStorage.getItem("user");
+//     axios
+//       .get(url, {
+//         headers: { Authorization: `Bearer ${token}` },
+//       })
+//       .then((response) => {
+//         console.log(response);
+//         this.setState({
+//           favoriteMovies: response.data.FavMovs,
+//         });
+//       });
+//   }
+
+//   addFavorite(movie) {
+//     let token = localStorage.getItem("token");
+//     let url =
+//       "https://myflix001.herokuapp.com/users/" +
+//       localStorage.getItem("user") +
+//       "/Movies/" +
+//       movie._id;
+//     console.log(token);
+//     axios
+//       .post(url, "", {
+//         headers: { Authorization: `Bearer ${token}` },
+//       })
+//       .then((response) => {
+//         console.log(response);
+//         window.open("/movies/" + movie._id, "_self");
+//       });
+//   }
+
+//   removeFavorite(movie) {
+//     let token = localStorage.getItem("token");
+//     let url =
+//       "https://myflix001.herokuapp.com/users/" +
+//       localStorage.getItem("user") +
+//       "/Movies/" +
+//       movie._id;
+//     axios
+//       .delete(url, {
+//         headers: { Authorization: `Bearer ${token}` },
+//       })
+//       .then((response) => {
+//         console.log(response);
+//         window.open("/movies/" + movie._id, "_self");
+//       });
+//   }
+
+//   render() {
+//     const { movie, clearState } = this.props;
+//     const { favoriteMovies } = this.state
+//     let addOrRem;
+//     if (!movie) return null;
+//     if (favoriteMovies.includes(movie._id)) {
+//       addOrRem = 
+//         <Link onClick={() => this.removeFavorite(movie)}>
+//           Remove Favorite
+//         </Link>
+//     } else { 
+//       addOrRem = 
+//         <Link onClick={() => this.addFavorite(movie)}>
+//           Add Favorite
+//         </Link>
+//     }
+//     return (
+      
+//       <div className="movie-view">
+//         <div className="movie-title">
+//             <h1>{movie.Title}</h1>
+//         </div>
+//         <div className="movie-description">
+//           {movie.Description}
+//         </div>
+//         <div>
+//           <span>
+//             <Link to={`/genres/${movie.Genre.Name}`}>
+//               {movie.Genre.Name}
+//             </Link>
+//           </span>
+//           <span>
+//             {" "+"|"+" "}
+//           </span>
+//           <span>
+//             <Link to={`/directors/${movie.Director.Name}`}>
+//               {movie.Director.Name}
+//             </Link>
+//           </span>
+//           <span>
+//             {" "+"|"+" "}
+//           </span>
+//           <span>
+//             {addOrRem}
+//           </span>
+//           <span>
+//             {" "+"|"+" "}
+//           </span>
+//           <span>
+//             <Link to={'/'}>All Movies</Link>
+//           </span>
+//         </div>
+//         <div className="movie-poster">
+//           <img src={movie.ImageURL} />
+//         </div>
+//       </div>
+
+//     );
+//   }
+// }
