@@ -123,11 +123,12 @@ a:hover, a:visited, a:active {
   text-align: center;
 }
 body {
-  background-image: linear-gradient(white, rgba(125, 143, 71, 0.522), white);
+  background-image: linear-gradient(white, rgba(216, 229, 255, 0.3), white);
+  background-size: cover;
 }
 
 .navbar {
-  border: 1px solid rgba(112, 130, 56, 0.522);
+  border: 1px solid rgba(216, 229, 255, 0.522);
   background-image: linear-gradient(white, #fffced);
 }
 

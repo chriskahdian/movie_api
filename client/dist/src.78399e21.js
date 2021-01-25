@@ -43187,7 +43187,7 @@ var DirectorView = /*#__PURE__*/function (_Component) {
         className: "cardTitle"
       }, _react.default.createElement("h1", null, director.Director.Name)), _react.default.createElement("hr", null), _react.default.createElement("div", {
         className: "cardDesc"
-      }, director.Director.Description), _react.default.createElement("div", {
+      }, director.Director.Bio), _react.default.createElement("div", {
         className: "allMoviesLink"
       }, _react.default.createElement(_reactRouterDom.Link, {
         to: '/'
@@ -43747,7 +43747,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55250" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58888" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

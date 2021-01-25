@@ -20,7 +20,7 @@ export class DirectorView extends Component {
                 </div>
                 <hr/>
                 <div className="cardDesc">
-                    {director.Director.Description}
+                    {director.Director.Bio}
                 </div>
                 <div className="allMoviesLink">
                     <Link to={'/'}>All Movies</Link>
