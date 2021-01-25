@@ -38402,7 +38402,7 @@ function LoginView(props) {
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
 
-    _axios.default.post('https://myflix001.herokuapp.com/login', {
+    _axios.default.post('https://moviesmoviesmovies.herokuapp.com/login', {
       Username: username,
       Password: password
     }).then(function (response) {
@@ -41515,7 +41515,7 @@ function RegistrationView() {
     };
 
     if (isValid) {
-      _axios.default.post("https://myflix001.herokuapp.com/users", createdUser).then(function (response) {
+      _axios.default.post("https://moviesmoviesmovies.herokuapp.com/users", createdUser).then(function (response) {
         console.log(response);
         console.log(response.data);
         alert("User created successfully");
@@ -42102,7 +42102,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     value: function getUser(token) {
       var _this2 = this;
 
-      var url = "https://myflix001.herokuapp.com/users/" + localStorage.getItem("user");
+      var url = "https://moviesmoviesmovies.herokuapp.com/users/" + localStorage.getItem("user");
 
       _axios.default.get(url, {
         headers: {
@@ -42121,7 +42121,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     value: function addFavorite(movie) {
       var token = localStorage.getItem("token");
 
-      var url = "https://myflix001.herokuapp.com/users/" + localStorage.getItem("user") + "/Movies/" + movie._id;
+      var url = "https://moviesmoviesmovies.herokuapp.com/users/" + localStorage.getItem("user") + "/Movies/" + movie._id;
 
       console.log(token);
 
@@ -42139,7 +42139,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     value: function removeFavorite(movie) {
       var token = localStorage.getItem("token");
 
-      var url = "https://myflix001.herokuapp.com/users/" + localStorage.getItem("user") + "/Movies/" + movie._id;
+      var url = "https://moviesmoviesmovies.herokuapp.com/users/" + localStorage.getItem("user") + "/Movies/" + movie._id;
 
       _axios.default.delete(url, {
         headers: {
@@ -42197,130 +42197,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return MovieView;
-}(_react.default.Component); // import React from "react";
-// import Button from "react-bootstrap/Button";
-// import Card from "react-bootstrap/Card";
-// import { Link } from "react-router-dom";
-// import axios from "axios";
-// import './movie-view.scss'
-// export class MovieView extends React.Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       favoriteMovies: [],
-//     };
-//   }
-//   componentDidMount() {
-//     let accessToken = localStorage.getItem("token");
-//     this.getUser(accessToken);
-//   }
-//   getUser(token) {
-//     let url =
-//       "https://myflix001.herokuapp.com/users/" +
-//       localStorage.getItem("user");
-//     axios
-//       .get(url, {
-//         headers: { Authorization: `Bearer ${token}` },
-//       })
-//       .then((response) => {
-//         console.log(response);
-//         this.setState({
-//           favoriteMovies: response.data.FavMovs,
-//         });
-//       });
-//   }
-//   addFavorite(movie) {
-//     let token = localStorage.getItem("token");
-//     let url =
-//       "https://myflix001.herokuapp.com/users/" +
-//       localStorage.getItem("user") +
-//       "/Movies/" +
-//       movie._id;
-//     console.log(token);
-//     axios
-//       .post(url, "", {
-//         headers: { Authorization: `Bearer ${token}` },
-//       })
-//       .then((response) => {
-//         console.log(response);
-//         window.open("/movies/" + movie._id, "_self");
-//       });
-//   }
-//   removeFavorite(movie) {
-//     let token = localStorage.getItem("token");
-//     let url =
-//       "https://myflix001.herokuapp.com/users/" +
-//       localStorage.getItem("user") +
-//       "/Movies/" +
-//       movie._id;
-//     axios
-//       .delete(url, {
-//         headers: { Authorization: `Bearer ${token}` },
-//       })
-//       .then((response) => {
-//         console.log(response);
-//         window.open("/movies/" + movie._id, "_self");
-//       });
-//   }
-//   render() {
-//     const { movie, clearState } = this.props;
-//     const { favoriteMovies } = this.state
-//     let addOrRem;
-//     if (!movie) return null;
-//     if (favoriteMovies.includes(movie._id)) {
-//       addOrRem = 
-//         <Link onClick={() => this.removeFavorite(movie)}>
-//           Remove Favorite
-//         </Link>
-//     } else { 
-//       addOrRem = 
-//         <Link onClick={() => this.addFavorite(movie)}>
-//           Add Favorite
-//         </Link>
-//     }
-//     return (
-//       <div className="movie-view">
-//         <div className="movie-title">
-//             <h1>{movie.Title}</h1>
-//         </div>
-//         <div className="movie-description">
-//           {movie.Description}
-//         </div>
-//         <div>
-//           <span>
-//             <Link to={`/genres/${movie.Genre.Name}`}>
-//               {movie.Genre.Name}
-//             </Link>
-//           </span>
-//           <span>
-//             {" "+"|"+" "}
-//           </span>
-//           <span>
-//             <Link to={`/directors/${movie.Director.Name}`}>
-//               {movie.Director.Name}
-//             </Link>
-//           </span>
-//           <span>
-//             {" "+"|"+" "}
-//           </span>
-//           <span>
-//             {addOrRem}
-//           </span>
-//           <span>
-//             {" "+"|"+" "}
-//           </span>
-//           <span>
-//             <Link to={'/'}>All Movies</Link>
-//           </span>
-//         </div>
-//         <div className="movie-poster">
-//           <img src={movie.ImageURL} />
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
+}(_react.default.Component);
 
 exports.MovieView = MovieView;
 },{"react":"../node_modules/react/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../../node_modules/axios/index.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"components/header/about.jsx":[function(require,module,exports) {
@@ -42543,7 +42420,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     value: function getUser(token) {
       var _this2 = this;
 
-      var url = "https://myflix001.herokuapp.com/users/" + localStorage.getItem("user");
+      var url = "https://moviesmoviesmovies.herokuapp.com/users/" + localStorage.getItem("user");
 
       _axios.default.get(url, {
         headers: {
@@ -42567,7 +42444,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 
       var token = localStorage.getItem("token");
 
-      var url = "https://myflix001.herokuapp.com/users/" + localStorage.getItem("user") + "/Movies/" + movie._id;
+      var url = "https://moviesmoviesmovies.herokuapp.com/users/" + localStorage.getItem("user") + "/Movies/" + movie._id;
 
       _axios.default.delete(url, {
         headers: {
@@ -42584,7 +42461,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     value: function handleDelete() {
       if (!confirm("Are you sure?")) return;
       var token = localStorage.getItem("token");
-      var url = "https://myflix001.herokuapp.com/users/" + this.state.username;
+      var url = "https://moviesmoviesmovies.herokuapp.com/users/" + this.state.username;
 
       _axios.default.delete(url, {
         headers: {
@@ -42651,160 +42528,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return ProfileView;
-}(_react.default.Component); // import React, { useState } from "react";
-// import PropTypes from "prop-types";
-// import Form from "react-bootstrap/Form";
-// import Button from "react-bootstrap/Button";
-// import Card from "react-bootstrap/Card";
-// import "./profile-view.scss";
-// import Container from "react-bootstrap/Container";
-// import Col from "react-bootstrap/Col";
-// import Row from "react-bootstrap/Row";
-// import { Link } from "react-router-dom";
-// import axios from "axios";
-// export class ProfileView extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       username: "",
-//       password: "",
-//       email: "",
-//       dob: "",
-//       favoriteMovies: [],
-//       movies: "",
-//     };
-//   }
-//   componentDidMount() {
-//     let accessToken = localStorage.getItem("token");
-//     this.getUser(accessToken);
-//   }
-//   formatDate(date) {
-//     if (date) date = date.substring(0, 10);
-//     return date;
-//   }
-//   getUser(token) {
-//     let url =
-//       "https://myflix001.herokuapp.com/users/" +
-//       localStorage.getItem("user");
-//     axios
-//       .get(url, {
-//         headers: { Authorization: `Bearer ${token}` },
-//       })
-//       .then((response) => {
-//         //console.log(response);
-//         this.setState({
-//           username: response.data.Username,
-//           password: response.data.Password,
-//           email: response.data.Email,
-//           dob: this.formatDate(response.data.Birthday),
-//           favoriteMovies: response.data.FavMovs,
-//         });
-//       });
-//   }
-//   removeFavorite(movie) {
-//     let token = localStorage.getItem("token");
-//     let url =
-//       "https://myflix001.herokuapp.com/users/" +
-//       localStorage.getItem("user") +
-//       "/Movies/" +
-//       movie._id;
-//     axios
-//       .delete(url, {
-//         headers: { Authorization: `Bearer ${token}` },
-//       })
-//       .then((response) => {
-//         console.log(response);
-//         this.componentDidMount();
-//       });
-//   }
-//   handleDelete() {
-//     if (!confirm("Are you sure?")) return;
-//     let token = localStorage.getItem("token");
-//     let url =
-//       "https://myflix001.herokuapp.com/users/" + this.state.username;
-//     axios
-//       .delete(url, {
-//         headers: { Authorization: `Bearer ${token}` },
-//       })
-//       .then((response) => console.log(response));
-//     localStorage.removeItem("token");
-//     window.open("/", "_self");
-//   }
-//   render() {
-//     const { movies } = this.props;
-//     const favoriteMovieList = movies.filter((movie) => {
-//       return this.state.favoriteMovies.includes(movie._id);
-//     });
-//     if (!movies) alert("Please sign in");
-//     return (
-//       <div className="userProfile" style={{ display: "flex" }}>
-//         <Container>
-//           <Row>
-//             <Form style={{ width: "36rem", float: "left" }}>
-//               <h1 style={{ textAlign: "center" }}>Profile Details</h1>
-//               <Form.Group controlId="formBasicUsername">
-//                 <h3>Username: </h3>
-//                 <Form.Label>{this.state.username}</Form.Label>
-//               </Form.Group>
-//               <Form.Group controlId="formBasicEmail">
-//                 <h3>Email:</h3>
-//                 <Form.Label>{this.state.email}</Form.Label>
-//               </Form.Group>
-//               <Form.Group controlId="formBasicDate">
-//                 <h3>Date of Birth:</h3>
-//                 <Form.Label>{this.state.dob}</Form.Label>
-//               </Form.Group>
-//               {
-//                 <Link to={`/update/${this.state.username}`}>
-//                   <Button variant="primary" type="link">
-//                     Edit
-//                   </Button>
-//                 </Link>
-//               }
-//               <Button variant="danger" onClick={() => this.handleDelete()}>
-//                 Delete User
-//               </Button>
-//               <Link to={`/`}>
-//                 <Button variant="light" type="submit">
-//                   Back
-//                 </Button>
-//               </Link>
-//             </Form>
-//           </Row>
-//           <Row>
-//             <div
-//               className="favoriteMovies"
-//               style={{
-//                 float: "right",
-//                 textAlign: "center",
-//                 width: "28rem",
-//               }}
-//             >
-//               <h1>Favorite Movies</h1>
-//               {favoriteMovieList.map((movie) => {
-//                 return (
-//                   <div key={movie._id}>
-//                     <Card>
-//                       <Card.Body>
-//                         <Link to={`/movies/${movie._id}`}>
-//                           <Card.Title>{movie.Title}</Card.Title>
-//                         </Link>
-//                       </Card.Body>
-//                     </Card>
-//                     <Button onClick={() => this.removeFavorite(movie)}>
-//                       Remove
-//                     </Button>
-//                   </div>
-//                 );
-//               })}
-//             </div>
-//           </Row>
-//         </Container>
-//       </div>
-//     );
-//   }
-// }
-
+}(_react.default.Component);
 
 exports.ProfileView = ProfileView;
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../../node_modules/axios/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx"}],"components/update-view/update-view.scss":[function(require,module,exports) {
@@ -42889,7 +42613,7 @@ function UpdateView(props) {
   var handleUpdate = function handleUpdate(e) {
     e.preventDefault();
     var isValid = formValidation();
-    var url = "https://myflix001.herokuapp.com/users/" + localStorage.getItem("user");
+    var url = "https://moviesmoviesmovies.herokuapp.com/users/" + localStorage.getItem("user");
 
     if (isValid) {
       _axios.default.put(url, {
@@ -43390,7 +43114,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function getMovies(token) {
       var _this2 = this;
 
-      _axios.default.get("https://myflix001.herokuapp.com/movies", {
+      _axios.default.get("https://moviesmoviesmovies.herokuapp.com/movies", {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -43433,7 +43157,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         className: "navbar-brand"
       }, _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
-      }, _react.default.createElement("h1", null, "myFlix001"))), _react.default.createElement(_Navbar.default.Toggle, {
+      }, _react.default.createElement("h1", null, "MoviesMoviesMovies"))), _react.default.createElement(_Navbar.default.Toggle, {
         "aria-controls": "basic-navbar-nav",
         className: "bg-light"
       }), _react.default.createElement(_Navbar.default.Collapse, {
@@ -43692,18 +43416,18 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 var store = (0, _redux.createStore)(_reducers.default); //Main component
 
-var MyFlixApplication = /*#__PURE__*/function (_React$Component) {
-  _inherits(MyFlixApplication, _React$Component);
+var MoviesMoviesMoviesApplication = /*#__PURE__*/function (_React$Component) {
+  _inherits(MoviesMoviesMoviesApplication, _React$Component);
 
-  var _super = _createSuper(MyFlixApplication);
+  var _super = _createSuper(MoviesMoviesMoviesApplication);
 
-  function MyFlixApplication() {
-    _classCallCheck(this, MyFlixApplication);
+  function MoviesMoviesMoviesApplication() {
+    _classCallCheck(this, MoviesMoviesMoviesApplication);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(MyFlixApplication, [{
+  _createClass(MoviesMoviesMoviesApplication, [{
     key: "render",
     value: function render() {
       return _react.default.createElement(_reactRedux.Provider, {
@@ -43712,13 +43436,13 @@ var MyFlixApplication = /*#__PURE__*/function (_React$Component) {
     }
   }]);
 
-  return MyFlixApplication;
+  return MoviesMoviesMoviesApplication;
 }(_react.default.Component); //Find the root of the app
 
 
 var container = document.getElementsByClassName('app-container')[0]; //Tell React to render app in root DOM element
 
-_reactDom.default.render(_react.default.createElement(MyFlixApplication), container);
+_reactDom.default.render(_react.default.createElement(MoviesMoviesMoviesApplication), container);
 },{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -43747,7 +43471,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58888" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50144" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
