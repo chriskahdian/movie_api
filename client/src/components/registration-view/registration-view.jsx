@@ -74,6 +74,7 @@ export function RegistrationView() {
     }
   };
 
+  
   return (
     <Form className="registration-form">
       <Form.Group controlId="pageTop">
