@@ -12,7 +12,6 @@ const {check, validationResult} = require('express-validator');
 // mongoose.connect("mongodb://localhost:27017/MyFlixDB", {
 mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
-
 app.use(morgan("common"));
 app.use(express.static("public"));
 app.use("/client", express.static(path.join(__dirname, "client", "dist")));
