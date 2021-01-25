@@ -10,7 +10,7 @@ import './index.scss';
 const store = createStore(moviesApp)
 
 //Main component
-class MyFlixApplication extends React.Component {
+class MoviesMoviesMoviesApplication extends React.Component {
   render() {
     return (
       <Provider store={store}>
@@ -24,4 +24,4 @@ class MyFlixApplication extends React.Component {
 const container = document.getElementsByClassName('app-container')[0];
 
 //Tell React to render app in root DOM element
-ReactDOM.render(React.createElement(MyFlixApplication), container);
+ReactDOM.render(React.createElement(MoviesMoviesMoviesApplication), container);

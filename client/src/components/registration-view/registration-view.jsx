@@ -60,7 +60,7 @@ export function RegistrationView() {
     };
     if (isValid) {
       axios
-        .post("https://myflix001.herokuapp.com/users", createdUser)
+        .post("https://moviesmoviesmovies.herokuapp.com/users", createdUser)
         .then((response) => {
           console.log(response);
           console.log(response.data);

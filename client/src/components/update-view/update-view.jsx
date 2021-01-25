@@ -18,7 +18,7 @@ export function UpdateView(props) {
     e.preventDefault();
     const isValid = formValidation();
     const url =
-      "https://myflix001.herokuapp.com/users/" +
+      "https://moviesmoviesmovies.herokuapp.com/users/" +
       localStorage.getItem("user");
     if (isValid) {
     axios

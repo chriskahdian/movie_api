@@ -66,7 +66,7 @@ class MainView extends React.Component {
 
   getMovies(token) {
     axios
-      .get("https://myflix001.herokuapp.com/movies", {
+      .get("https://moviesmoviesmovies.herokuapp.com/movies", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -99,7 +99,7 @@ class MainView extends React.Component {
 
           <Navbar sticky="top" expand="sm" className="navbar">
             <Navbar.Brand className="navbar-brand">
-              <Link to={`/`}><h1>myFlix001</h1></Link>
+              <Link to={`/`}><h1>MoviesMoviesMovies</h1></Link>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" className="bg-light"/>
             <Navbar.Collapse className="justify-content-end navbar-light" id="basic-navbar-nav">

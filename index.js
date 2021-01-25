@@ -49,7 +49,7 @@ app.use((err, req, res, next) => {
 
 //GET homepage
 app.get("/", function (req, res) {
-  res.send("Welcome to MyFlix!");
+  res.send("Welcome to MoviesMoviesMovies!");
 });
 
 //GET all movies' data
