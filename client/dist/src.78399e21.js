@@ -42461,18 +42461,20 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     value: function handleDelete() {
       if (!confirm("Are you sure?")) return;
       var token = localStorage.getItem("token");
-      var url = "https://moviesmoviesmovies.herokuapp.com/users/" + this.state.username;
+      var user = localStorage.getItem("user");
+      var url = "https://moviesmoviesmovies.herokuapp.com/users/" + user;
 
       _axios.default.delete(url, {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
-      }).then(function (response) {
-        return console.log(response);
+      }).then(function () {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        window.open("/", "_self");
+      }).catch(function (error) {
+        console.log(error);
       });
-
-      localStorage.removeItem("token");
-      window.open("/", "_self");
     }
   }, {
     key: "render",
@@ -43471,7 +43473,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50144" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50884" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
